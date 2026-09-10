@@ -1,0 +1,1207 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taza Skin Clinic — SEO Audit &amp; Roadmap</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --navy:#0F3F76; --blue:#2483C5; --ink:#231F20; --mute:#64748B;
+    --line:#E2E8F0; --wash:#F6F9FC; --panel:#FFFFFF;
+    --err:#C0342B; --err-bg:#FDECEA; --warn:#B26B00; --warn-bg:#FEF6E7;
+    --ok:#1E7A4B; --ok-bg:#EAF6EF; --note:#2483C5; --note-bg:#EAF2FA;
+    --sb:220px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--wash); color:var(--ink);
+    font:14px/1.55 "Segoe UI",-apple-system,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  }
+  h1,h2,h3,h4{margin:0}
+  a{color:var(--blue)}
+
+  /* ============ thanh trên ============ */
+  .topbar{
+    position:sticky; top:0; z-index:50; background:var(--navy); color:#fff;
+    display:flex; align-items:center; gap:18px; padding:0 22px; height:56px;
+  }
+  .brand{font-weight:700; font-size:16px; letter-spacing:-.01em; white-space:nowrap}
+  .brand span{opacity:.55; font-weight:400; margin-left:9px}
+  .crumb{
+    font-size:12.5px; opacity:.72; border-left:1px solid rgba(255,255,255,.22);
+    padding-left:18px; white-space:nowrap
+  }
+  .topbar .right{margin-left:auto; display:flex; align-items:center; gap:14px; font-size:12.5px}
+  .pill{background:rgba(255,255,255,.14); padding:4px 11px; border-radius:20px; white-space:nowrap}
+
+  /* ============ khung ============ */
+  .shell{display:flex; align-items:flex-start}
+  nav.side{
+    position:sticky; top:56px; width:var(--sb); flex:0 0 var(--sb);
+    height:calc(100vh - 56px); overflow-y:auto; background:var(--panel);
+    border-right:1px solid var(--line); padding:20px 0 40px;
+  }
+  nav.side .grp{
+    font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--mute);
+    font-weight:700; padding:16px 20px 7px;
+  }
+  nav.side a{
+    display:flex; justify-content:space-between; gap:8px; align-items:baseline;
+    padding:7px 20px; color:var(--ink); text-decoration:none; font-size:13.5px;
+    border-left:3px solid transparent;
+  }
+  nav.side a:hover{background:var(--wash); border-left-color:var(--line)}
+  nav.side a.on{background:var(--note-bg); border-left-color:var(--blue); font-weight:600; color:var(--navy)}
+  nav.side a b{font-size:11.5px; font-weight:700; color:var(--mute); font-variant-numeric:tabular-nums}
+  nav.side a.on b{color:var(--blue)}
+
+  main{flex:1; min-width:0; padding:26px 30px 90px; max-width:1320px}
+  section{scroll-margin-top:70px; margin-bottom:44px}
+  .sechead{display:flex; align-items:baseline; gap:12px; margin-bottom:5px; flex-wrap:wrap}
+  .sechead h2{font-size:21px; color:var(--navy); letter-spacing:-.01em}
+  .sechead .tag{
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:700;
+    color:var(--mute); border:1px solid var(--line); padding:2px 8px; border-radius:3px; background:#fff;
+  }
+  .lede{color:var(--mute); margin:0 0 18px; max-width:96ch; font-size:13.5px}
+
+  /* ============ thẻ số ============ */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(196px,1fr)); gap:14px; margin-bottom:18px}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:15px 17px}
+  .card .lbl{font-size:12px; color:var(--mute); margin-bottom:7px; display:flex; gap:6px; align-items:center}
+  .card .val{font-size:29px; font-weight:700; color:var(--navy); line-height:1.05; font-variant-numeric:tabular-nums}
+  .card .val.bad{color:var(--err)} .card .val.good{color:var(--ok)} .card .val.warn{color:var(--warn)}
+  .card .sub{font-size:12px; color:var(--mute); margin-top:6px}
+  .card .sub b{color:var(--ink); font-weight:600}
+
+  /* ============ điểm sức khoẻ ============ */
+  .health{
+    display:grid; grid-template-columns:200px 1fr; gap:26px; align-items:center;
+    background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:22px 24px; margin-bottom:18px;
+  }
+  .gauge{position:relative; width:170px; height:170px}
+  .gauge svg{transform:rotate(-90deg)}
+  .gauge .mid{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+  }
+  .gauge .mid b{font-size:42px; color:var(--err); line-height:1; font-variant-numeric:tabular-nums}
+  .gauge .mid small{font-size:11px; color:var(--mute); margin-top:5px; letter-spacing:.05em; text-transform:uppercase}
+  .hbars{display:flex; flex-direction:column; gap:11px}
+  .hb{display:grid; grid-template-columns:190px 1fr 116px; gap:14px; align-items:center; font-size:13px}
+  .hb .bar{height:9px; background:var(--line); border-radius:5px; overflow:hidden}
+  .hb .bar i{display:block; height:100%; border-radius:5px}
+  .hb .n{text-align:right; color:var(--mute); font-size:12px; font-variant-numeric:tabular-nums}
+
+  /* ============ bảng ============ */
+  .tbl{background:var(--panel); border:1px solid var(--line); border-radius:6px; overflow:hidden}
+  table{border-collapse:collapse; width:100%; font-size:13px}
+  th,td{padding:10px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+  thead th{
+    background:var(--navy); color:#fff; font-size:10.5px; letter-spacing:.08em;
+    text-transform:uppercase; font-weight:700; border:0; white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover td{background:var(--wash)}
+  td.n,th.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  td.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:12px}
+  td b{font-weight:600}
+  .sm{color:var(--mute); font-size:12px; display:block; margin-top:3px}
+
+  /* ============ nhãn mức độ ============ */
+  .sev{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; padding:2px 8px; border-radius:3px; white-space:nowrap;
+  }
+  .sev.e{background:var(--err-bg); color:var(--err)}
+  .sev.w{background:var(--warn-bg); color:var(--warn)}
+  .sev.n{background:var(--note-bg); color:var(--note)}
+  .sev.q{background:var(--ok-bg); color:var(--ok)}
+  .chip{
+    display:inline-block; font-size:11px; padding:1px 7px; border-radius:3px;
+    background:var(--wash); border:1px solid var(--line); color:var(--mute); white-space:nowrap;
+  }
+
+  /* ============ thanh trong ô ============ */
+  .mini{height:6px; background:var(--line); border-radius:4px; overflow:hidden; min-width:60px; margin-top:5px}
+  .mini i{display:block; height:100%; border-radius:4px; background:var(--blue)}
+
+  /* ============ ma trận ICE ============ */
+  .matrix{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:6px;
+  }
+  .quad{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:16px 18px}
+  .quad h4{font-size:14px; color:var(--navy); margin-bottom:3px}
+  .quad .q-sub{font-size:12px; color:var(--mute); margin-bottom:11px}
+  .quad ul{margin:0; padding-left:17px}
+  .quad li{font-size:12.5px; margin-bottom:5px}
+  .quad.qw{border-top:3px solid var(--ok)}
+  .quad.mp{border-top:3px solid var(--blue)}
+  .quad.fl{border-top:3px solid var(--warn)}
+  .quad.no{border-top:3px solid var(--mute)}
+
+  /* ============ dòng thời gian ============ */
+  .sprints{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--panel)}
+  .sp{padding:15px 17px; border-right:1px solid var(--line)}
+  .sp:last-child{border-right:0}
+  .sp .h{font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--blue); font-weight:700}
+  .sp .d{font-size:12px; color:var(--mute); margin:3px 0 9px}
+  .sp .g{font-size:13.5px; font-weight:600; color:var(--navy); margin-bottom:8px; line-height:1.35}
+  .sp ul{margin:0; padding-left:16px}
+  .sp li{font-size:12.5px; margin-bottom:4px; color:var(--ink)}
+
+  /* ============ khối cảnh báo ============ */
+  .flag{border-left:4px solid var(--warn); background:var(--warn-bg); padding:15px 18px; border-radius:0 5px 5px 0; margin:16px 0}
+  .flag.red{border-left-color:var(--err); background:var(--err-bg)}
+  .flag h4{font-size:13.5px; margin-bottom:6px; color:var(--warn)}
+  .flag.red h4{color:var(--err)}
+  .flag p{margin:0 0 7px; font-size:13px}
+  .flag p:last-child{margin-bottom:0}
+
+  footer{border-top:1px solid var(--line); padding-top:18px; color:var(--mute); font-size:12px}
+
+  @media (max-width:1000px){
+    nav.side{display:none}
+    main{padding:20px 16px 60px}
+    .health{grid-template-columns:1fr}
+    .gauge{margin:0 auto}
+    .hb{grid-template-columns:1fr; gap:4px}
+    .hb .n{text-align:left}
+    .matrix{grid-template-columns:1fr}
+    .crumb{display:none}
+  }
+  @media print{
+    .topbar,nav.side{display:none} main{max-width:none;padding:0}
+    body{background:#fff} section{break-inside:avoid}
+  }
+
+  .hbars.solo{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:20px 24px; margin-bottom:18px}
+  .filters{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 12px}
+  .filters button{font:inherit; font-size:12.5px; padding:4px 12px; border:1px solid var(--line);
+    background:#fff; color:var(--ink); border-radius:20px; cursor:pointer}
+  .filters button[aria-pressed="true"]{background:var(--navy); border-color:var(--navy); color:#fff}
+  .filters input{font:inherit; font-size:12.5px; padding:5px 12px; border:1px solid var(--line); border-radius:20px; min-width:250px}
+  .filters .note{font-size:12px; color:var(--mute)}
+  .scroll{max-height:none}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0}
+  @media (max-width:1000px){.two{grid-template-columns:1fr}}
+  .sp .meta{font-size:12px; color:var(--mute); margin-top:8px}
+  h3.sub{font-size:15px; color:var(--navy); margin:22px 0 8px}
+  .cards.g3{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:1200px){.cards.g3{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:760px){.cards,.cards.g3{grid-template-columns:1fr}}
+  .hb{grid-template-columns:250px 1fr 110px}
+  .more{border-top:1px solid var(--line); background:var(--wash); text-align:center; padding:9px}
+  .more button{font:inherit; font-size:12.5px; font-weight:600; color:var(--navy); background:#fff;
+    border:1px solid var(--line); border-radius:20px; padding:5px 16px; cursor:pointer}
+  .more button:hover{background:var(--note-bg); border-color:var(--blue)}
+  .more button:focus-visible{outline:2px solid var(--blue); outline-offset:2px}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">Taza Skin Clinic <span>SEO Audit &amp; Roadmap</span></div>
+  <div class="crumb">tazaskinclinic.com · 40 URL · dữ liệu GSC 16/07/2025 – 06/09/2026</div>
+  <div class="right"><span class="pill">Crawl 10/09/2026</span><span class="pill">Chưa triển khai</span></div>
+</div>
+
+<div class="shell">
+<nav class="side"><div class="grp">Tổng quan</div><a href="#exec" data-t="exec">Executive summary<b></b></a><a href="#ke-hoach" data-t="ke-hoach">Kế hoạch<b></b></a><a href="#muc-do" data-t="muc-do">Phân bố mức độ<b>37</b></a><div class="grp">Hiện trạng</div><a href="#traffic" data-t="traffic">Organic Traffic<b>18</b></a><a href="#ai" data-t="ai">AI Visibility<b>10</b></a><a href="#kw" data-t="kw">Keyword & Cluster<b>9</b></a><div class="grp">Kế hoạch</div><a href="#ice" data-t="ice">Prioritization (ICE)<b>33</b></a><a href="#roadmap" data-t="roadmap">Roadmap 4 sprint<b>4</b></a><a href="#kpi" data-t="kpi">KPI & đo lường<b>23</b></a><a href="#quyet-dinh" data-t="quyet-dinh">Cần quyết định<b>10</b></a><div class="grp">Phụ lục</div><a href="#url404" data-t="url404">Broken URLs<b>83</b></a><a href="#money" data-t="money">Money pages<b>18</b></a><a href="#nguon" data-t="nguon">Nguồn dữ liệu<b></b></a></nav>
+<main>
+
+<section id="exec">
+  <div class="sechead"><h2>Executive summary</h2><span class="tag">Tổng quan</span></div>
+  <p class="lede">Website có nền tảng hiển thị thật — <b>741.518 impression trong 418 ngày</b> — nhưng phần lớn thứ hạng đó nằm ở URL đã bị xoá. Nút thắt nằm ở <b>ba chỗ rò rỉ</b>: 83 broken URL vẫn nhận organic traffic, conversion tracking chưa bật, và money pages không được internal link nuôi.</p>
+  <div class="cards g3"><div class="card"><div class="lbl">Organic clicks rơi vào broken URL</div><div class="val bad">28,4%</div><div class="sub">2.552 / 8.998 click · <b>2.228 click/năm</b></div></div><div class="card"><div class="lbl">Impression của nhóm broken URL</div><div class="val bad">66,1%</div><div class="sub">490.076 / 741.518 impression</div></div><div class="card"><div class="lbl">Share of voice — money pages</div><div class="val warn">7,9%</div><div class="sub">712 click · homepage một mình nhận 4.393</div></div><div class="card"><div class="lbl">Conversion đo được trong GA4</div><div class="val bad">0</div><div class="sub">0/10 event được đánh dấu key event</div></div><div class="card"><div class="lbl">Medical schema markup</div><div class="val bad">0/40</div><div class="sub">không trang nào khai MedicalClinic, Service hay FAQPage</div></div><div class="card"><div class="lbl">AI crawler access</div><div class="val good">7/7</div><div class="sub">không bot nào bị firewall chặn</div></div></div>
+  <div class="flag red">
+    <h4>Ba phát hiện quyết định toàn bộ roadmap</h4>
+    <p><b>1. Thứ hạng đang nằm ở URL đã xoá.</b> 83 broken URL vẫn nhận 2.552 click và 490.076 impression, tức 28,4% click và 66,1% impression của cả site. Quy một năm là 2.228 click mất trắng. Ba cluster mụn, sẹo rỗ và tắm trắng chiếm 43 URL.</p>
+    <p><b>2. Không có số conversion để đối chiếu.</b> GA4 chưa đánh dấu key event nào nên mọi báo cáo conversion bằng 0, trong khi hành động gửi form đang mang hai tên event khác nhau, cộng thô 865 lượt và nghi đếm trùng. Chưa mở đo lường thì mọi cải thiện sau đó không chứng minh được bằng số.</p>
+    <p><b>3. Money pages bị bỏ đói internal link.</b> 16/18 trang dịch vụ không có contextual internal link đi ra, 11 trang chỉ nhận đúng một dofollow internal link. Người đọc vào trang dịch vụ là hết đường đi, Google cũng không có tín hiệu để hiểu các trang này cùng cluster.</p>
+  </div>
+</section>
+
+<section id="ke-hoach">
+  <div class="sechead"><h2>Kế hoạch</h2><span class="tag">14/09 → 25/11/2026</span></div>
+  <p class="lede">Ba trục hiện trạng quy về <b>37 hạng mục</b> thi công, xếp theo ICE và chia vào 4 sprint. Sprint 1 là đợt gấp chạy 3 ngày liền vì nhóm broken URL đang mất 2.228 click mỗi năm; ba sprint sau mỗi sprint 10 ngày công. Tổng <b>200 giờ công</b> cộng 6 giờ cho cửa sổ đo lại. Kết quả kỹ thuật đo được ngay sau mỗi sprint; kết quả phụ thuộc thuật toán Google chỉ đọc được từ 25/11/2026.</p>
+  <p class="lede">Việc chia theo ba vai trò. Người phụ trách SEO nhận 22 hạng mục (98 giờ) trong WordPress, plugin, Search Console và GA4. Người viết nội dung nhận 6 hạng mục (90 giờ): image alt attribute, FAQ, dẫn nguồn y khoa, viết lại title tag. Người quản trị hạ tầng chỉ nhận 3 hạng mục (12 giờ) buộc phải đụng máy chủ và Cloudflare.</p>
+  <div class="tbl"><table id="tb1"><thead><tr><th>Sprint</th><th class="n">Khoảng ngày</th><th>Trọng tâm</th>
+    <th class="n">Giờ công</th><th>Xong sprint này thì có gì</th></tr></thead><tbody><tr><td><b>S1</b></td><td class="n">14/09/2026 – 16/09/2026</td>
+    <td>Dọn rò rỉ traffic và mở đo lường<span class="sm">TR-14 · TR-01 · TR-04 · TR-08 · TR-02 · TR-15</span></td><td class="n">25 h</td><td>Gọi lại 83 URL: 0 URL trả 404 · báo cáo chuyển đổi GA4 khác 0 · crawl lại: 0 broken internal link · sitemap_index còn 3 sitemap con · đủ 6/6 security header</td></tr><tr><td><b>S2</b></td><td class="n">17/09/2026 – 30/09/2026</td>
+    <td>Dọn on-page và mở khai báo<span class="sm">TR-10 · AI-02 · TR-16 · TR-12 · KW-09 · TR-11 · TR-05 · AI-04</span></td><td class="n">37 h</td><td>Tỷ lệ ảnh có image alt attribute 100% · 40/40 trang có đúng 1 H1 tag · Rich Results Test không báo lỗi · 0 internal link nofollow trừ link chức năng</td></tr><tr><td><b>S3</b></td><td class="n">01/10/2026 – 14/10/2026</td>
+    <td>Cấu trúc liên kết và khai báo dịch vụ<span class="sm">KW-03 · AI-03 · TR-03 · AI-09 · TR-17 · AI-06 · TR-13</span></td><td class="n">68 h</td><td>18/18 trang dịch vụ có contextual internal link đi ra · 18/18 có FAQPage schema hợp lệ · 18/18 có outgoing link dẫn nguồn y khoa · slow page còn tối đa 10</td></tr><tr><td><b>S4</b></td><td class="n">15/10/2026 – 28/10/2026</td>
+    <td>Nội dung và nhóm đang bị chặn<span class="sm">KW-05 · KW-02 · AI-07 · AI-08 · AI-05 · AI-10 · KW-07 · KW-01 · KW-04 · KW-06</span></td><td class="n">70 h</td><td>Toàn bộ title tag ≤ 65 ký tự · mỗi content cluster có 1 pillar page · trang thực thể đã xuất bản · có baseline AI và 20 từ khoá cố định. Cần CD-07 và CD-08 được duyệt.</td></tr><tr><td><b>Đo lại</b></td><td class="n">29/10/2026 – 25/11/2026</td>
+    <td>Cửa sổ đo lại — chờ dữ liệu Google<span class="sm">Nhóm chỉ số Kỳ vọng: average position · CTR · organic clicks vào trang dịch vụ · Core Web Vitals</span></td><td class="n">6 h</td><td>Đủ 28 ngày dữ liệu sau sprint cuối mới đọc được. Đo trước là đọc ra số sai</td></tr></tbody></table></div>
+  <div class="flag">
+    <h4>Hai chỗ chịu tải cao nhất</h4>
+    <p>Sprint 1 với 25/24 giờ — đợt gấp ba ngày, đã kín và không còn chỗ cho việc phát sinh; riêng khâu duyệt và cài 83 redirect chiếm 12 giờ. Sprint 4 với 70/80 giờ, chủ yếu là khối lượng biên tập nội dung, chỉ chạy đủ nếu danh sách cụm từ pháp chế và tên bác sĩ chịu trách nhiệm chuyên môn có trước 15/10 — 42 giờ biên tập phụ thuộc hai câu trả lời đó.</p>
+  </div>
+</section>
+
+<section id="muc-do">
+  <div class="sechead"><h2>Phân bố mức độ</h2><span class="tag">37 hạng mục</span></div>
+  <p class="lede">Bản này cố ý không có Site Health Score tổng hợp: điểm đó do công cụ trả phí sinh ra theo công thức riêng của từng hãng, dự án không mua công cụ nên đưa vào là số không kiểm chứng được. Thay bằng phân bố severity và ba tỷ lệ nền, mỗi con số đều gọi được nguồn. Indexable pages tính trên 37 trang HTML đang sống, không tính 3 trang ngoài tập index coverage.</p>
+  <div class="hbars solo">
+    <div class="hb"><div><span class="sev e">Error</span> Đang mất click hoặc chặn đo lường</div><div class="bar"><i style="width:50%;background:var(--err)"></i></div>
+    <div class="n">9 hạng mục</div></div>
+    <div class="hb"><div><span class="sev w">Warning</span> Ảnh hưởng rõ tới thứ hạng</div><div class="bar"><i style="width:100%;background:var(--warn)"></i></div>
+    <div class="n">18 hạng mục</div></div>
+    <div class="hb"><div><span class="sev n">Notice</span> Nên tối ưu, chưa mất traffic</div><div class="bar"><i style="width:56%;background:var(--note)"></i></div>
+    <div class="n">10 hạng mục</div></div>
+    <div class="hb"><div>Indexable pages</div><div class="bar"><i style="width:97%;background:var(--ok)"></i></div>
+    <div class="n">36 / 37</div></div>
+    <div class="hb"><div>Money pages có contextual link đi ra</div><div class="bar"><i style="width:11%;background:var(--err)"></i></div>
+    <div class="n">2 / 18</div></div>
+    <div class="hb"><div>Ảnh có image alt attribute</div><div class="bar"><i style="width:33%;background:var(--warn)"></i></div>
+    <div class="n">445 / 1.343</div></div>
+  </div>
+  <div class="matrix">
+    <div class="quad qw"><h4>Quick win — 10 hạng mục · 22 giờ</h4>
+      <div class="q-sub">Kỹ thuật và đo lường, không đụng câu chữ quảng cáo nên không chờ pháp chế</div>
+      <ul><li>Sửa 2 vị trí sinh broken internal link trong template — 3 giờ</li>
+      <li>Gỡ 19 non-content URL khỏi XML sitemap — 1 giờ</li>
+      <li>Gỡ nofollow trên internal link — 3 giờ</li>
+      <li>Đặt lại H1 tag cho 5 trang — 2 giờ</li></ul></div>
+    <div class="quad mp"><h4>Main project — 11 hạng mục · 134 giờ</h4>
+      <div class="q-sub">Khối lượng lớn, cần nhiều ngày công liên tục</div>
+      <ul><li>301 redirect cho 83 broken URL — 12 giờ</li>
+      <li>Viết image alt cho 898 ảnh — 20 giờ</li>
+      <li>Contextual internal link cho 18 money page — 12 giờ</li>
+      <li>FAQPage schema và pillar page — 40 giờ</li></ul></div>
+    <div class="quad fl"><h4>Fill-in — 12 hạng mục · 44 giờ</h4>
+      <div class="q-sub">Làm khi có chỗ trống trong sprint, hoặc chờ đầu vào</div>
+      <ul><li>Đo baseline AI mention và AI Overview — 6 giờ</li>
+      <li>Đối chiếu NAP giữa các nguồn — 4 giờ</li>
+      <li>Phân tích search intent trên bảng từ khoá — 18 giờ</li></ul></div>
+    <div class="quad no"><h4>Không phải làm — 4 hạng mục</h4>
+      <div class="q-sub">Đã kiểm và đạt chuẩn, hoặc gộp vào hạng mục khác</div>
+      <ul><li>TR-07 — Clicks rơi vào URL ngoài XML sitemap</li><li>TR-09 — Không có file tài liệu nội bộ tải công khai</li><li>AI-01 — AI crawler không bị firewall chặn</li><li>CANON — Canonical tự khai khớp với canonical Google chọn</li></ul></div>
+  </div>
+  <div class="two">
+    <div class="quad"><h4>Trạng thái thi công</h4>
+      <div class="q-sub">Đếm trực tiếp từ cột trạng thái của backlog</div>
+      <p style="font-size:12.5px;margin:0">17 hạng mục sẵn sàng triển khai — đã có số đo và phương án. 10 hạng mục chờ quyết định của Ban lãnh đạo hoặc Bộ phận pháp chế. 5 hạng mục chưa đủ dữ liệu đầu vào. 1 hạng mục chờ hạng mục tiền đề. 4 hạng mục đã đạt chuẩn hoặc gộp mục.</p></div>
+    <div class="quad"><h4>Điều kiện đo lại</h4>
+      <div class="q-sub">Cửa sổ 29/10 – 25/11/2026</div>
+      <p style="font-size:12.5px;margin:0">Nhóm chỉ số Cam kết đo được ngay sau mỗi sprint bằng crawl lại hoặc gọi thật URL. Nhóm Kỳ vọng — average position, CTR, click vào money pages — cần đủ 28 ngày dữ liệu Google sau sprint cuối; đo trước mốc đó là đọc ra số sai.</p></div>
+  </div>
+</section>
+
+<section id="traffic">
+  <div class="sechead"><h2>Trục 1 — Organic Traffic</h2><span class="tag">18 hạng mục</span></div>
+  <p class="lede">Những vấn đề đang trực tiếp làm mất click, chặn Googlebot phân bổ crawl budget, hoặc làm hỏng dữ liệu đo lường.</p>
+  <div class="cards "><div class="card"><div class="lbl">Organic clicks trong kỳ</div><div class="val ">8.998</div><div class="sub">418 ngày · 741.518 impression</div></div><div class="card"><div class="lbl">Broken internal links</div><div class="val bad">114</div><div class="sub">trỏ vào 46 đích · sinh từ 2 vị trí trong template</div></div><div class="card"><div class="lbl">Internal link nofollow</div><div class="val bad">21,9%</div><div class="sub">204/930 link — chặn truyền link equity</div></div><div class="card"><div class="lbl">Slow page</div><div class="val bad">36/41</div><div class="sub">5/7 URL mobile có LCP trên 8 giây</div></div></div>
+  <div class="tbl"><table id="tb2" class="clip" data-limit="12"><thead><tr><th>Mức độ</th><th>Issue</th><th class="n">Quy mô</th>
+    <th>Cách xử lý</th><th>Chỉ số theo dõi</th><th>Hạng mục</th></tr></thead><tbody><tr><td><span class="sev e">Error</span></td>
+        <td><b>Conversion tracking chưa bật — GA4 không có key event</b> <span class="sm">10/10 sự kiện GA4 có keyEvents = 0. Gửi form mang hai tên: dien-form-thanh-cong 748 lượt, form_submit 117 lượt. Sự kiện click 2.263 lượt gồm cả Zalo v</span></td>
+        <td class="n">0 key event · 2 tên sự kiện cho cùng một hành động gửi form</td><td>Bật key event cho sự kiện gửi form, gửi thử form đếm số sự kiện bắn ra, gộp tên sự kiện, chờ 14 ngày lấy dữ liệu sạch. Sai thứ tự sẽ hỏng cả dữ liệu cũ và mới.</td>
+        <td>Số sự kiện GA4 đánh dấu key event · Số lượt gửi form mỗi tháng</td>
+        <td class="mono">TR-14</td></tr><tr><td><span class="sev e">Error</span></td>
+        <td><b>Broken internal links trong template toàn site</b> <span class="sm">Ahrefs Site Audit 10/09/2026: 114 broken internal link tới 46 đích, phát sinh trên 41 trang nguồn. Site crawl nội bộ 08/09 đếm 109 link / 44 đích. Đã </span></td>
+        <td class="n">114 link / 46 đích (Ahrefs)</td><td>Sửa 2 vị trí trong global template block: khối liệt kê dịch vụ, và ô href bị điền chuỗi văn bản thay vì đường dẫn</td>
+        <td>Số broken internal link</td>
+        <td class="mono">TR-01</td></tr><tr><td><span class="sev e">Error</span></td>
+        <td><b>Broken URLs vẫn nhận organic traffic</b> <span class="sm">Hạng mục nặng nhất: chiếm 28,4% tổng click. Trong nhóm có 2 trang dịch vụ. URL /cach-tri-nam-mang/ Google báo lỗi 5xx nhưng đo thật ra 404, mang 2.305</span></td>
+        <td class="n">83 URL · 2.228 clicks/năm</td><td>301 redirect từng URL về đích gần nghĩa nhất. Đích đề xuất đã điền sẵn trong Redirect Map, chờ phê duyệt.</td>
+        <td>Tỷ lệ click rơi vào trang 404 · Số URL đã xoá còn trả 404</td>
+        <td class="mono">TR-04</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Non-content URLs nằm trong XML sitemap</b> <span class="sm">Toàn bộ URL sinh từ blocks-sitemap.xml: trả 200 với 0 byte, không title, không canonical. Google phát hiện 17 URL, chưa  Ahrefs bổ sung: 2 trang index</span></td>
+        <td class="n">19 URL</td><td>Tắt blocks-sitemap.xml trong plugin SEO; chặn /blocks/ trong robots.txt</td>
+        <td>Số URL không phải nội dung trong sitemap</td>
+        <td class="mono">TR-08</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Redirect chains trên internal link</b> <span class="sm">/dich-vu/oxygen-detox thiếu dấu gạch chéo cuối, và /dich-vu/tri-hoi-nach-laser-nano/ — cả hai 301 về đích đúng</span></td>
+        <td class="n">2 link / 2 đích</td><td>Sửa href trỏ thẳng URL đích cuối</td>
+        <td>Số broken internal link</td>
+        <td class="mono">TR-02</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>H1 tag missing &amp; multiple H1 tags</b> <span class="sm">Thiếu H1: trang chủ và /tin-tuc/. Thừa H1: /dich-vu-dieu-tri-viem-da-co-dia-tu-goc/ có 4, /dich-vu/oxygen-detox/ có 4, /dich-vu/ có 2</span></td>
+        <td class="n">2 trang thiếu / 4 trang thừa</td><td>Mỗi trang giữ đúng 1 H1 tag, các heading còn lại hạ xuống H2</td>
+        <td>Số trang có đúng một thẻ H1</td>
+        <td class="mono">TR-10</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Nofollow trên internal link toàn site</b> <span class="sm">Ahrefs Site Audit 10/09/2026: 40/40 trang có internal link nofollow. Nofollow chặn truyền PageRank giữa các trang dịch vụ.</span></td>
+        <td class="n">204/930 internal link (21,9%)</td><td>Gỡ nofollow trên internal link trong global template block, giữ nofollow cho link trỏ ra ngoài.</td>
+        <td>Tỷ lệ internal link nofollow</td>
+        <td class="mono">TR-16</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Image tag thiếu trong XML sitemap</b> <span class="sm">post-sitemap có 40 thẻ ảnh, page-sitemap chỉ có 2 — tức trang dịch vụ gần như không khai ảnh nào</span></td>
+        <td class="n">42 thẻ ảnh trên 38 URL</td><td>Bật khai báo ảnh cho post type page trong cấu hình sitemap của plugin SEO</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">TR-12</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Thiếu security header</b> <span class="sm">Đã có HSTS, x-content-type-options, x-frame-options, referrer-policy. Thiếu content-security-policy và permissions-policy. Máy chủ sau Cloudflare, PHP</span></td>
+        <td class="n">4/6 header</td><td>Bổ sung content-security-policy và permissions-policy tại tầng Cloudflare, không sửa trong WordPress</td>
+        <td>Số header bảo mật</td>
+        <td class="mono">TR-15</td></tr><tr><td><span class="sev e">Error</span></td>
+        <td><b>Image alt attribute thiếu trên toàn site</b> <span class="sm">Nặng nhất: trang chủ 77/92, /gioi-thieu/ 46/54, /dich-vu/ 43/54, /taza-skin-clinic-nha-trang-ra-mat/ 34/47</span></td>
+        <td class="n">898 / 1.343 ảnh</td><td>Viết alt theo thứ tự: trang chủ 77 ảnh · /gioi-thieu/ 46 · /dich-vu/ 43 · 18 trang dịch vụ. Mô tả đúng nội dung ảnh kèm tên dịch vụ, không nhồi từ khoá</td>
+        <td>Tỷ lệ ảnh có image alt attribute</td>
+        <td class="mono">TR-11</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Orphan pages — không nhận contextual link</b> <span class="sm">Ahrefs định nghĩa orphan page là trang không có internal link nào trỏ tới: 1 trang. Site crawl đếm 5 trang không nhận contextual internal link ở lớp t</span></td>
+        <td class="n">Ahrefs 1 orphan page · 5 trang không có contextual link</td><td>Bổ sung contextual internal link từ trang chủ và trang danh mục về các trang này</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">TR-03</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>URL dịch vụ đã ngừng vẫn nằm trong index coverage</b> <span class="sm">Hai URL dịch vụ trả 404 nhưng mỗi URL vẫn nhận 33 internal link từ global template block. Chưa rõ là ngừng kinh doanh hay đổi đường dẫn.</span></td>
+        <td class="n">2 URL</td><td>Xác nhận trạng thái kinh doanh. Ngừng bán: 301 redirect về trang danh mục. Đổi đường dẫn: 301 redirect về URL mới</td>
+        <td>Số URL đã xoá còn trả 404</td>
+        <td class="mono">TR-05</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Image file size quá lớn — slow page</b> <span class="sm">Ahrefs Site Audit 10/09/2026. Bổ sung cho TR-06: không có CrUX field data nhưng lab data đã đủ để xác định nguyên nhân.</span></td>
+        <td class="n">25 ảnh quá nặng · 36 slow page · 1 file CSS quá lớn</td><td>Nén ảnh về WebP dưới ngưỡng, bật lazy-load, gộp và rút gọn file CSS.</td>
+        <td>Số trang slow page</td>
+        <td class="mono">TR-17</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Thiếu editorial outgoing link dẫn nguồn y khoa</b> <span class="sm">Tổng link ra là 1.179 nhưng 1.169 là nút chia sẻ mạng xã hội, Zalo, Messenger, bản đồ. 10 link thật đều trỏ tới báo chí, không có nguồn có thẩm quyền </span></td>
+        <td class="n">36/39 trang đã đo · chỉ 10 link biên tập · trang thứ 40 chưa đo</td><td>Bổ sung dẫn nguồn y khoa trên trang dịch vụ. Kiểm trước plugin có tự gắn nofollow cho mọi outgoing link không</td>
+        <td>Số link biên tập trỏ ra nguồn ngoài</td>
+        <td class="mono">TR-13</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Core Web Vitals chưa kết luận được — thiếu CrUX field data</b> <span class="sm">Không có CrUX field data ở cả 7 URL lẫn cấp tên miền do lưu lượng chưa đủ ngưỡng. Lab data: TTFB cao nhất 246 ms (đạt), 5/7 trang mobile có LCP trên 8</span></td>
+        <td class="n">chưa đo</td><td>Không có CrUX field data vì lưu lượng chưa đủ ngưỡng Google gom. Không kết luận đạt hay trượt. Nếu vẫn tối ưu thì sửa LCP từng trang dựa trên lab data</td>
+        <td>Tốc độ trên CrUX field data</td>
+        <td class="mono">TR-06</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Clicks rơi vào URL ngoài XML sitemap</b> <span class="chip">gộp mục</span><span class="sm">Gộp vào TR-04, không tách thành việc riêng</span></td>
+        <td class="n">Trùng TR-04</td><td>Gộp vào TR-04, không tách thành hạng mục riêng</td>
+        <td>Tỷ lệ click rơi vào trang 404</td>
+        <td class="mono">TR-07</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Không có file tài liệu nội bộ tải công khai</b> <span class="chip">đã đạt chuẩn</span><span class="sm">Đã kiểm 229 URL: 87 URL là file ảnh .webp trong wp-content. Không có file .pdf .docx .xlsx nào tải công khai.</span></td>
+        <td class="n">0 file</td><td>Không có tài liệu nội bộ tải công khai; 87/229 URL đã kiểm là ảnh nội dung.</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">TR-09</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Canonical tự khai khớp với canonical Google chọn</b> <span class="chip">đã đạt chuẩn</span><span class="sm">38 URL có dữ liệu canonical đều khớp</span></td>
+        <td class="n">0/38 URL lệch</td><td>38 URL có dữ liệu canonical đều khớp</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">CANON</td></tr></tbody></table><div class="more"><button type="button" data-tbl="tb2">Xem thêm 6 dòng</button></div></div>
+</section>
+
+<section id="ai">
+  <div class="sechead"><h2>Trục 2 — AI Visibility (GEO/AEO)</h2><span class="tag">10 hạng mục</span></div>
+  <p class="lede">Khả năng được AI Overviews, ChatGPT, Perplexity, Gemini đọc và trích dẫn. Điều kiện cần là <b>bot truy cập được</b> và <b>entity khai báo đúng</b>. Bot đã vào được 7/7; phần thiếu nằm ở khai báo.</p>
+  <div class="cards "><div class="card"><div class="lbl">AI crawler access</div><div class="val good">7/7</div><div class="sub">GPTBot · ClaudeBot · PerplexityBot · Google-Extended · CCBot · Applebot · Bytespider</div></div><div class="card"><div class="lbl">Medical entity schema</div><div class="val bad">0/40</div><div class="sub">đang khai Organization chung, không phải loại cơ sở y tế</div></div><div class="card"><div class="lbl">Service schema trên money pages</div><div class="val bad">0/18</div><div class="sub">đang khai là Article hoặc WebPage</div></div><div class="card"><div class="lbl">FAQ structured data</div><div class="val bad">0/40</div><div class="sub">loại khai báo AI hay dùng để trích nguyên khối</div></div></div>
+  <div class="tbl"><table id="tb3"><thead><tr><th>Mức độ</th><th>Issue</th><th class="n">Quy mô</th>
+    <th>Cách xử lý</th><th>Chỉ số theo dõi</th><th>Hạng mục</th></tr></thead><tbody><tr><td><span class="sev e">Error</span></td>
+        <td><b>Entity khai sai loại trong schema markup</b> <span class="sm">Đang khai loại Organization chung, không phải loại dành cho cơ sở y tế. Chỉ khai 1 địa chỉ trong khi website có khối nhiều chi nhánh.</span></td>
+        <td class="n">40/40 trang</td><td>Đổi type Organization thành MedicalClinic; khai đủ từng chi nhánh thay vì một địa chỉ</td>
+        <td>Số trang có khai báo dành cho cơ sở y tế</td>
+        <td class="mono">AI-02</td></tr><tr><td><span class="sev e">Error</span></td>
+        <td><b>Service schema thiếu trên money pages</b> <span class="sm">Toàn site không có MedicalClinic, MedicalBusiness, MedicalProcedure, Service, Physician hay FAQPage. Trang dịch vụ đang khai là Article hoặc WebPage</span></td>
+        <td class="n">0 / 18 trang</td><td>Chốt loại schema cho trang bệnh lý và trang thẩm mỹ thuần, rồi áp cho 18 trang dịch vụ</td>
+        <td>Số trang có khai báo dành cho cơ sở y tế</td>
+        <td class="mono">AI-03</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>FAQ structured data phủ 0%</b> <span class="sm">Không trang nào có FAQPage. Đây là loại khai báo AI hay dùng để trích dẫn trả lời</span></td>
+        <td class="n">0 / 40 trang</td><td>Viết 4–6 câu hỏi thường gặp cho mỗi trang dịch vụ rồi khai FAQPage schema</td>
+        <td>Số trang có khai báo dành cho cơ sở y tế</td>
+        <td class="mono">AI-09</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Schema markup còn khai dịch vụ đã ngừng</b> <span class="sm">Cùng 2 URL của TR-05. Cần nội bộ xác nhận còn bán hay không</span></td>
+        <td class="n">2 URL</td><td>Xử lý cùng lượt với TR-05. Gỡ schema của dịch vụ đã ngừng</td>
+        <td>Số trang có khai báo dành cho cơ sở y tế</td>
+        <td class="mono">AI-04</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Chưa có baseline AI mention</b> <span class="sm">Chưa có baseline. Cần chạy bộ truy vấn thủ công trên AI answer engine.</span></td>
+        <td class="n">chưa đo</td><td>Chạy tay bộ 10–15 truy vấn bệnh nhân trên ChatGPT, Perplexity, Gemini. Cố định bộ truy vấn ngay lần đo đầu</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">AI-07</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Chưa theo dõi AI Overview trên SERP mục tiêu</b> <span class="sm">Cần bộ truy vấn thủ công trên AI answer engine và tập 20 từ khoá cố định.</span></td>
+        <td class="n">chưa đo</td><td>Kiểm 20 từ khoá cố định: có AI Overview hay không, nguồn nào được trích dẫn</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">AI-08</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Không có entity/fact page tập trung</b> <span class="sm">/gioi-thieu/ chỉ 494 từ, không tập hợp giấy phép hoạt động, đội ngũ bác sĩ, danh sách chi nhánh kèm giờ làm việc</span></td>
+        <td class="n">0 trang</td><td>Dựng trang tập hợp giấy phép hoạt động, đội ngũ bác sĩ, danh sách chi nhánh kèm giờ làm việc</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">AI-05</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Slow server response cho AI crawler</b> <span class="sm">Ahrefs Site Audit 10/09/2026, nhóm AI Discoverability. AI bot vẫn truy cập được nhưng phản hồi chậm.</span></td>
+        <td class="n">2 URL</td><td>Kiểm cấu hình cache và CDN cho user-agent của AI crawler, hạ thời gian phản hồi về dưới 600 ms.</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">AI-10</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>NAP chưa kiểm tính nhất quán</b> <span class="sm">Mới đọc được phía website. Còn phải tra Google Business Profile và các trang mạng xã hội</span></td>
+        <td class="n">chưa đo</td><td>Lập bảng đối chiếu NAP giữa website, Google Business Profile và các trang mạng xã hội, rồi đồng bộ</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">AI-06</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>AI crawler không bị firewall chặn</b> <span class="chip">đã đạt chuẩn</span><span class="sm">GPTBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Applebot, Bytespider đều trả 200 với đúng 177.423 byte, bằng bản Chrome nhận được</span></td>
+        <td class="n">0/7 bot bị chặn</td><td>7/7 bot trả 200 với 177.423 byte, bằng đúng bản Chrome nhận được</td>
+        <td>Số bot AI truy cập được</td>
+        <td class="mono">AI-01</td></tr></tbody></table></div>
+  <div class="flag"><h4>Ba hạng mục trong trục này chưa có phép đo sẵn</h4>
+  <p>AI mention, AI Overview và NAP đều chưa đo. Hai việc đầu chạy tay được ngay bằng một bộ truy vấn cố định, tổng 6 giờ, đã xếp vào Sprint 4; NAP cần tra Google Business Profile và social, 4 giờ, Sprint 3. Quan trọng là cố định bộ truy vấn ngay lần đo đầu — đổi bộ là số không so sánh được.</p></div>
+</section>
+
+<section id="kw">
+  <div class="sechead"><h2>Trục 3 — Keyword &amp; Cluster</h2><span class="tag">9 hạng mục</span></div>
+  <p class="lede">Toàn bộ click hiện có đến từ nội dung dạng bài mẹo, còn money pages — nơi đặt form đăng ký — gần như không nhận được click nào.</p>
+  <div class="cards "><div class="card"><div class="lbl">Click vào 18 money pages</div><div class="val bad">712</div><div class="sub">7,9% tổng click · homepage nhận 4.393</div></div><div class="card"><div class="lbl">Average position</div><div class="val ">17,57</div><div class="sub">mobile · desktop 28,51 · trung bình có trọng số impression</div></div><div class="card"><div class="lbl">Title tag vượt ngưỡng hiển thị</div><div class="val warn">22/40</div><div class="sub">dài nhất 115 ký tự · 5 title dùng cụm cam kết tuyệt đối</div></div><div class="card"><div class="lbl">Pillar page cho cluster bệnh lý</div><div class="val bad">0</div><div class="sub">trang danh mục dịch vụ chỉ có 281 từ, là trang liệt kê</div></div></div>
+  <div class="tbl"><table id="tb4"><thead><tr><th>Mức độ</th><th>Issue</th><th class="n">Quy mô</th>
+    <th>Cách xử lý</th><th>Chỉ số theo dõi</th><th>Hạng mục</th></tr></thead><tbody><tr><td><span class="sev e">Error</span></td>
+        <td><b>Money pages bị bỏ đói internal link</b> <span class="sm">Không trang dịch vụ nào mồ côi, nhưng mỗi trang chỉ nhận 1–3 contextual internal link và không trỏ sang dịch vụ cùng nhóm bệnh lý</span></td>
+        <td class="n">16/18 trang là dead-end</td><td>Thêm khối liên kết ngang giữa các dịch vụ cùng nhóm bệnh lý, đặt trong thân bài, không đặt trong sidebar</td>
+        <td>Số trang dịch vụ có contextual internal link đi ra</td>
+        <td class="mono">KW-03</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Title tag &amp; meta description vượt ngưỡng hiển thị</b> <span class="sm">Đếm bằng ký tự, ngưỡng 65 và 160. Dài nhất 115 ký tự. Ba trang thiếu meta description đều là trang chuyên mục /tin-tuc-su-kien/</span></td>
+        <td class="n">22/40 title vượt · 4 trang thiếu meta description</td><td>Viết lại 22 title tag và 3 meta description. Cần danh sách cụm từ được pháp chế duyệt trước, vì 5 title đang dùng cụm cam kết tuyệt đối</td>
+        <td>Số trang có title tag trong ngưỡng 65 ký tự</td>
+        <td class="mono">KW-05</td></tr><tr><td><span class="sev e">Error</span></td>
+        <td><b>Money pages không nhận được share of voice</b> <span class="sm">15 trang dịch vụ có dữ liệu cộng lại được 712 click trong kỳ, trong khi 83 trang đã xoá lấy 2.552 click. Trang chủ một mình 4.393 click</span></td>
+        <td class="n">712 / 8.998 clicks = 7,9%</td><td>Là hệ quả của TR-04 và KW-03. Đo lại sau khi hai hạng mục đó hoàn tất, không xử lý riêng</td>
+        <td>Click vào 18 trang dịch vụ</td>
+        <td class="mono">KW-02</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Money pages thiếu conversion block</b> <span class="sm">Phải chốt định nghĩa khối bắt buộc trước. Đề xuất 4 khối: form đăng ký · giá hoặc cam kết · bác sĩ hoặc kỹ thuật viên thực hiện · quy trình và thời gi</span></td>
+        <td class="n">chưa đo</td><td>Chốt 4 khối bắt buộc rồi crawl đếm: form đăng ký · giá hoặc cam kết · người thực hiện · quy trình và thời gian điều trị</td>
+        <td>Số lượt gửi form mỗi tháng</td>
+        <td class="mono">KW-09</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Chưa có pillar page cho cluster bệnh lý</b> <span class="sm">Không có trang tổng nào giải thích một nhóm bệnh lý. /dich-vu/ chỉ là trang liệt kê 281 từ</span></td>
+        <td class="n">0 pillar page</td><td>Dựng pillar page cho các content cluster có lưu lượng: mụn · nám và tàn nhang · viêm nang lông · sẹo rỗ</td>
+        <td>Average position — điện thoại</td>
+        <td class="mono">KW-07</td></tr><tr><td><span class="sev e">Error</span></td>
+        <td><b>Intent mismatch — nội dung xếp hạng không phải money page</b> <span class="sm">Cần bảng 9.708 từ khoá của Search Console, hiện chưa có trong hồ sơ audit.</span></td>
+        <td class="n">chưa đo</td><td>Cần bảng từ khoá xuất từ Google Sheet. Phân loại search intent rồi quyết giữ, tái định vị hoặc hợp nhất từng cụm</td>
+        <td>Click vào 18 trang dịch vụ</td>
+        <td class="mono">KW-01</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Striking distance chưa được khai thác</b> <span class="sm">Cần bảng 9.708 từ khoá</span></td>
+        <td class="n">chưa đo</td><td>Cần bảng từ khoá. Lọc average position 11–20, sắp theo impressions, cố định tập ngay lúc đo baseline</td>
+        <td>Average position — điện thoại</td>
+        <td class="mono">KW-04</td></tr><tr><td><span class="sev w">Warning</span></td>
+        <td><b>Content cluster yếu — average position ngoài trang 2</b> <span class="sm">Cần bảng 9.708 từ khoá và bảng phân cụm 8 nhóm bệnh lý</span></td>
+        <td class="n">chưa đo</td><td>Cần bảng từ khoá và bảng phân cụm 8 nhóm bệnh lý</td>
+        <td>Average position — máy tính</td>
+        <td class="mono">KW-06</td></tr><tr><td><span class="sev n">Notice</span></td>
+        <td><b>Chưa phân tích keyword gap với đối thủ</b> <span class="sm">Cần danh sách 3–5 đối thủ trực tiếp từ Ban lãnh đạo và một công cụ phân tích trả phí</span></td>
+        <td class="n">chưa đo</td><td>Cần danh sách 3–5 đối thủ trực tiếp và một công cụ phân tích trả phí</td>
+        <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td>
+        <td class="mono">KW-08</td></tr></tbody></table></div>
+  <div class="flag"><h4>Chưa có bảng cluster performance</h4>
+  <p>Bảng đó cần dữ liệu từ khoá của Site Explorer, hiện chưa lấy. Thay vào đó, phần phụ lục dựng bảng phân cụm 83 broken URL theo bệnh lý — cùng mục đích: chỉ ra cluster nào đang thật sự tạo ra lưu lượng cho phòng khám.</p></div>
+</section>
+
+<section id="ice">
+  <div class="sechead"><h2>Prioritization (ICE)</h2><span class="tag">33 hạng mục chấm điểm</span></div>
+  <p class="lede">ICE = (Impact + Confidence + Ease)/3 trên thang 1–10: mức tác động lên chỉ số, mức chắc chắn rằng cách xử lý có tác dụng, và mức dễ thi công. Điểm cao làm trước. Bốn hạng mục đã đạt chuẩn hoặc gộp mục không chấm điểm.</p>
+  <div class="filters">
+    <button data-f="axis" data-v="all" aria-pressed="true">Tất cả trục</button>
+    <button data-f="axis" data-v="traffic" aria-pressed="false">Organic Traffic</button>
+    <button data-f="axis" data-v="ai" aria-pressed="false">AI Visibility</button>
+    <button data-f="axis" data-v="kw" aria-pressed="false">Keyword &amp; Cluster</button>
+    <span style="width:10px"></span>
+    <button data-f="status" data-v="all" aria-pressed="true">Mọi trạng thái</button>
+    <button data-f="status" data-v="go" aria-pressed="false">Sẵn sàng triển khai</button>
+    <button data-f="status" data-v="wait" aria-pressed="false">Chờ quyết định</button>
+    <button data-f="status" data-v="block" aria-pressed="false">Chưa đủ dữ liệu</button>
+    <span class="note" id="cnt">33 hạng mục đang hiển thị</span>
+  </div>
+  <div class="tbl"><table id="backlog" class="clip" data-limit="12"><thead><tr><th>Hạng mục</th><th>Issue</th><th>Mức độ</th><th>Trục</th>
+    <th class="n">ICE</th><th class="n">Giờ</th><th>Sprint</th><th>Vai trò</th><th>Trạng thái</th><th>Chỉ số theo dõi</th></tr></thead>
+    <tbody><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-14</td>
+      <td><b>Conversion tracking chưa bật — GA4 không có key event</b><span class="sm">0 key event · 2 tên sự kiện cho cùng một hành động gửi form</span></td>
+      <td><span class="sev e">Error</span></td><td>Traffic</td>
+      <td class="n"><b>8,7</b></td><td class="n">6</td>
+      <td>S1</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số sự kiện GA4 đánh dấu key event · Số lượt gửi form mỗi tháng</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-01</td>
+      <td><b>Broken internal links trong template toàn site</b><span class="sm">114 link / 46 đích (Ahrefs)</span></td>
+      <td><span class="sev e">Error</span></td><td>Traffic</td>
+      <td class="n"><b>8,7</b></td><td class="n">3</td>
+      <td>S1</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số broken internal link</td></tr><tr data-axis="traffic" data-status="wait">
+      <td class="mono">TR-04</td>
+      <td><b>Broken URLs vẫn nhận organic traffic</b><span class="sm">83 URL · 2.228 clicks/năm</span></td>
+      <td><span class="sev e">Error</span></td><td>Traffic</td>
+      <td class="n"><b>8,3</b></td><td class="n">12</td>
+      <td>S1</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Tỷ lệ click rơi vào trang 404 · Số URL đã xoá còn trả 404</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-08</td>
+      <td><b>Non-content URLs nằm trong XML sitemap</b><span class="sm">19 URL</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>8,3</b></td><td class="n">1</td>
+      <td>S1</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số URL không phải nội dung trong sitemap</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-02</td>
+      <td><b>Redirect chains trên internal link</b><span class="sm">2 link / 2 đích</span></td>
+      <td><span class="sev n">Notice</span></td><td>Traffic</td>
+      <td class="n"><b>7,7</b></td><td class="n">1</td>
+      <td>S1</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số broken internal link</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-10</td>
+      <td><b>H1 tag missing &amp; multiple H1 tags</b><span class="sm">2 trang thiếu / 4 trang thừa</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>7,7</b></td><td class="n">2</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số trang có đúng một thẻ H1</td></tr><tr data-axis="ai" data-status="wait">
+      <td class="mono">AI-02</td>
+      <td><b>Entity khai sai loại trong schema markup</b><span class="sm">40/40 trang</span></td>
+      <td><span class="sev e">Error</span></td><td>AI visibility</td>
+      <td class="n"><b>7,7</b></td><td class="n">4</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Số trang có khai báo dành cho cơ sở y tế</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-16</td>
+      <td><b>Nofollow trên internal link toàn site</b><span class="sm">204/930 internal link (21,9%)</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>7,7</b></td><td class="n">3</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Tỷ lệ internal link nofollow</td></tr><tr data-axis="kw" data-status="go">
+      <td class="mono">KW-03</td>
+      <td><b>Money pages bị bỏ đói internal link</b><span class="sm">16/18 trang là dead-end</span></td>
+      <td><span class="sev e">Error</span></td><td>Keyword rankings</td>
+      <td class="n"><b>7,3</b></td><td class="n">12</td>
+      <td>S3</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số trang dịch vụ có contextual internal link đi ra</td></tr><tr data-axis="kw" data-status="wait">
+      <td class="mono">KW-05</td>
+      <td><b>Title tag &amp; meta description vượt ngưỡng hiển thị</b><span class="sm">22/40 title vượt · 4 trang thiếu meta description</span></td>
+      <td><span class="sev w">Warning</span></td><td>Keyword rankings</td>
+      <td class="n"><b>7,3</b></td><td class="n">8</td>
+      <td>S4</td><td>Người viết nội dung</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Số trang có title tag trong ngưỡng 65 ký tự</td></tr><tr data-axis="kw" data-status="block">
+      <td class="mono">KW-02</td>
+      <td><b>Money pages không nhận được share of voice</b><span class="sm">712 / 8.998 clicks = 7,9%</span></td>
+      <td><span class="sev e">Error</span></td><td>Keyword rankings</td>
+      <td class="n"><b>7,3</b></td><td class="n">2</td>
+      <td>S4</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ hạng mục tiền đề</span></td>
+      <td>Click vào 18 trang dịch vụ</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-12</td>
+      <td><b>Image tag thiếu trong XML sitemap</b><span class="sm">42 thẻ ảnh trên 38 URL</span></td>
+      <td><span class="sev n">Notice</span></td><td>Traffic</td>
+      <td class="n"><b>7,0</b></td><td class="n">1</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="kw" data-status="wait">
+      <td class="mono">KW-09</td>
+      <td><b>Money pages thiếu conversion block</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev w">Warning</span></td><td>Keyword rankings</td>
+      <td class="n"><b>7,0</b></td><td class="n">3</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Số lượt gửi form mỗi tháng</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-15</td>
+      <td><b>Thiếu security header</b><span class="sm">4/6 header</span></td>
+      <td><span class="sev n">Notice</span></td><td>Traffic</td>
+      <td class="n"><b>6,7</b></td><td class="n">2</td>
+      <td>S1</td><td>Người quản trị hạ tầng</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số header bảo mật</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-11</td>
+      <td><b>Image alt attribute thiếu trên toàn site</b><span class="sm">898 / 1.343 ảnh</span></td>
+      <td><span class="sev e">Error</span></td><td>Traffic</td>
+      <td class="n"><b>6,7</b></td><td class="n">20</td>
+      <td>S2</td><td>Người viết nội dung</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Tỷ lệ ảnh có image alt attribute</td></tr><tr data-axis="ai" data-status="wait">
+      <td class="mono">AI-03</td>
+      <td><b>Service schema thiếu trên money pages</b><span class="sm">0 / 18 trang</span></td>
+      <td><span class="sev e">Error</span></td><td>AI visibility</td>
+      <td class="n"><b>6,7</b></td><td class="n">10</td>
+      <td>S3</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Số trang có khai báo dành cho cơ sở y tế</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-03</td>
+      <td><b>Orphan pages — không nhận contextual link</b><span class="sm">Ahrefs 1 orphan page · 5 trang không có contextual link</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>6,7</b></td><td class="n">6</td>
+      <td>S3</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="traffic" data-status="wait">
+      <td class="mono">TR-05</td>
+      <td><b>URL dịch vụ đã ngừng vẫn nằm trong index coverage</b><span class="sm">2 URL</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>6,3</b></td><td class="n">2</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Số URL đã xoá còn trả 404</td></tr><tr data-axis="ai" data-status="go">
+      <td class="mono">AI-09</td>
+      <td><b>FAQ structured data phủ 0%</b><span class="sm">0 / 40 trang</span></td>
+      <td><span class="sev w">Warning</span></td><td>AI visibility</td>
+      <td class="n"><b>6,3</b></td><td class="n">16</td>
+      <td>S3</td><td>Người viết nội dung</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số trang có khai báo dành cho cơ sở y tế</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-17</td>
+      <td><b>Image file size quá lớn — slow page</b><span class="sm">25 ảnh quá nặng · 36 slow page · 1 file CSS quá lớn</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>6,3</b></td><td class="n">8</td>
+      <td>S3</td><td>Người quản trị hạ tầng</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số trang slow page</td></tr><tr data-axis="ai" data-status="wait">
+      <td class="mono">AI-04</td>
+      <td><b>Schema markup còn khai dịch vụ đã ngừng</b><span class="sm">2 URL</span></td>
+      <td><span class="sev w">Warning</span></td><td>AI visibility</td>
+      <td class="n"><b>6,0</b></td><td class="n">2</td>
+      <td>S2</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Số trang có khai báo dành cho cơ sở y tế</td></tr><tr data-axis="ai" data-status="go">
+      <td class="mono">AI-07</td>
+      <td><b>Chưa có baseline AI mention</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev n">Notice</span></td><td>AI visibility</td>
+      <td class="n"><b>6,0</b></td><td class="n">4</td>
+      <td>S4</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="ai" data-status="go">
+      <td class="mono">AI-08</td>
+      <td><b>Chưa theo dõi AI Overview trên SERP mục tiêu</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev n">Notice</span></td><td>AI visibility</td>
+      <td class="n"><b>6,0</b></td><td class="n">2</td>
+      <td>S4</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="ai" data-status="wait">
+      <td class="mono">AI-05</td>
+      <td><b>Không có entity/fact page tập trung</b><span class="sm">0 trang</span></td>
+      <td><span class="sev w">Warning</span></td><td>AI visibility</td>
+      <td class="n"><b>6,0</b></td><td class="n">10</td>
+      <td>S4</td><td>Người viết nội dung</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="ai" data-status="go">
+      <td class="mono">AI-10</td>
+      <td><b>Slow server response cho AI crawler</b><span class="sm">2 URL</span></td>
+      <td><span class="sev w">Warning</span></td><td>AI visibility</td>
+      <td class="n"><b>6,0</b></td><td class="n">2</td>
+      <td>S4</td><td>Người quản trị hạ tầng</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="ai" data-status="block">
+      <td class="mono">AI-06</td>
+      <td><b>NAP chưa kiểm tính nhất quán</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev w">Warning</span></td><td>AI visibility</td>
+      <td class="n"><b>5,7</b></td><td class="n">4</td>
+      <td>S3</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chưa đủ dữ liệu</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="kw" data-status="wait">
+      <td class="mono">KW-07</td>
+      <td><b>Chưa có pillar page cho cluster bệnh lý</b><span class="sm">0 pillar page</span></td>
+      <td><span class="sev w">Warning</span></td><td>Keyword rankings</td>
+      <td class="n"><b>5,7</b></td><td class="n">24</td>
+      <td>S4</td><td>Người viết nội dung</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td>Average position — điện thoại</td></tr><tr data-axis="kw" data-status="block">
+      <td class="mono">KW-01</td>
+      <td><b>Intent mismatch — nội dung xếp hạng không phải money page</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev e">Error</span></td><td>Keyword rankings</td>
+      <td class="n"><b>5,7</b></td><td class="n">8</td>
+      <td>S4</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chưa đủ dữ liệu</span></td>
+      <td>Click vào 18 trang dịch vụ</td></tr><tr data-axis="kw" data-status="block">
+      <td class="mono">KW-04</td>
+      <td><b>Striking distance chưa được khai thác</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev w">Warning</span></td><td>Keyword rankings</td>
+      <td class="n"><b>5,7</b></td><td class="n">4</td>
+      <td>S4</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chưa đủ dữ liệu</span></td>
+      <td>Average position — điện thoại</td></tr><tr data-axis="traffic" data-status="go">
+      <td class="mono">TR-13</td>
+      <td><b>Thiếu editorial outgoing link dẫn nguồn y khoa</b><span class="sm">36/39 trang đã đo · chỉ 10 link biên tập · trang thứ 40 chưa đo</span></td>
+      <td><span class="sev n">Notice</span></td><td>Traffic</td>
+      <td class="n"><b>5,3</b></td><td class="n">12</td>
+      <td>S3</td><td>Người viết nội dung</td>
+      <td><span class="chip">Sẵn sàng triển khai</span></td>
+      <td>Số link biên tập trỏ ra nguồn ngoài</td></tr><tr data-axis="kw" data-status="block">
+      <td class="mono">KW-06</td>
+      <td><b>Content cluster yếu — average position ngoài trang 2</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev w">Warning</span></td><td>Keyword rankings</td>
+      <td class="n"><b>5,3</b></td><td class="n">6</td>
+      <td>S4</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chưa đủ dữ liệu</span></td>
+      <td>Average position — máy tính</td></tr><tr data-axis="kw" data-status="wait">
+      <td class="mono">KW-08</td>
+      <td><b>Chưa phân tích keyword gap với đối thủ</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev n">Notice</span></td><td>Keyword rankings</td>
+      <td class="n"><b>4,3</b></td><td class="n"></td>
+      <td>Chưa xếp lịch</td><td>Ban lãnh đạo</td>
+      <td><span class="chip">Chờ quyết định</span></td>
+      <td><span class="sm" style="margin:0">chưa nối chỉ số</span></td></tr><tr data-axis="traffic" data-status="block">
+      <td class="mono">TR-06</td>
+      <td><b>Core Web Vitals chưa kết luận được — thiếu CrUX field data</b><span class="sm">chưa đo</span></td>
+      <td><span class="sev w">Warning</span></td><td>Traffic</td>
+      <td class="n"><b>4,0</b></td><td class="n"></td>
+      <td>Đo lại</td><td>Người phụ trách SEO</td>
+      <td><span class="chip">Chưa đủ dữ liệu</span></td>
+      <td>Tốc độ trên CrUX field data</td></tr></tbody></table><div class="more"><button type="button" data-tbl="backlog">Xem thêm 21 dòng</button></div></div>
+
+  <h3 class="sub">8 hạng mục chưa nối được với KPI nào</h3>
+  <p class="lede">Nhóm sửa xong nhưng không có chỉ số nào chứng minh được là tạo ra thay đổi. Đề xuất ngay dưới bảng.</p>
+  <div class="tbl"><table id="tb5"><thead><tr><th>Hạng mục</th><th>Issue</th><th class="n">Giờ</th><th>Sprint</th><th>Nội dung công việc</th></tr></thead>
+    <tbody><tr><td class="mono">TR-12</td><td><b>Image tag thiếu trong XML sitemap</b></td>
+  <td class="n">1 h</td><td>S2</td><td>Bật khai báo ảnh cho post type page trong cấu hình sitemap của plugin SEO</td></tr><tr><td class="mono">TR-03</td><td><b>Orphan pages — không nhận contextual link</b></td>
+  <td class="n">6 h</td><td>S3</td><td>Bổ sung contextual internal link từ trang chủ và trang danh mục về các trang này</td></tr><tr><td class="mono">AI-07</td><td><b>Chưa có baseline AI mention</b></td>
+  <td class="n">4 h</td><td>S4</td><td>Chạy tay bộ 10–15 truy vấn bệnh nhân trên ChatGPT, Perplexity, Gemini. Cố định bộ truy vấn ngay lần đo đầu</td></tr><tr><td class="mono">AI-08</td><td><b>Chưa theo dõi AI Overview trên SERP mục tiêu</b></td>
+  <td class="n">2 h</td><td>S4</td><td>Kiểm 20 từ khoá cố định: có AI Overview hay không, nguồn nào được trích dẫn</td></tr><tr><td class="mono">AI-05</td><td><b>Không có entity/fact page tập trung</b></td>
+  <td class="n">10 h</td><td>S4</td><td>Dựng trang tập hợp giấy phép hoạt động, đội ngũ bác sĩ, danh sách chi nhánh kèm giờ làm việc</td></tr><tr><td class="mono">AI-10</td><td><b>Slow server response cho AI crawler</b></td>
+  <td class="n">2 h</td><td>S4</td><td>Kiểm cấu hình cache và CDN cho user-agent của AI crawler, hạ thời gian phản hồi về dưới 600 ms.</td></tr><tr><td class="mono">AI-06</td><td><b>NAP chưa kiểm tính nhất quán</b></td>
+  <td class="n">4 h</td><td>S3</td><td>Lập bảng đối chiếu NAP giữa website, Google Business Profile và các trang mạng xã hội, rồi đồng bộ</td></tr><tr><td class="mono">KW-08</td><td><b>Chưa phân tích keyword gap với đối thủ</b></td>
+  <td class="n">—</td><td>Chưa xếp lịch</td><td>Cần danh sách 3–5 đối thủ trực tiếp và một công cụ phân tích trả phí</td></tr></tbody></table></div>
+  <div class="flag"><h4>Đề xuất cho nhóm chưa nối KPI</h4>
+    <p><b>Bổ sung chỉ số cho 4 hạng mục đo được ngay:</b> số image tag trong XML sitemap, số trang không nhận internal link, thời gian phản hồi máy chủ với AI crawler, số dòng lệch trong bảng NAP. Bốn chỉ số này crawl lại là đếm được, thêm vào KPI Tracking ở lần đo đầu tiên.</p>
+    <p><b>Hạ ưu tiên 4 hạng mục còn lại</b> vì phụ thuộc bên thứ ba hoặc cần công cụ trả phí: AI mention baseline, AI Overview tracking, entity page, keyword gap analysis. Ba hạng mục đầu vẫn giữ trong Sprint 4 để có số nền; keyword gap chưa xếp lịch cho tới khi có danh sách đối thủ và quyết định mua công cụ.</p></div>
+
+  <h3 class="sub">5 hạng mục chưa đủ dữ liệu đầu vào</h3>
+  <p class="lede">Giữ nguyên trong plan kèm giờ công ước lượng, mở ra làm khi có đầu vào — không phải lập lại kế hoạch.</p>
+  <div class="tbl"><table id="tb6"><thead><tr><th>Hạng mục</th><th>Issue</th><th class="n">Giờ</th><th>Sprint</th><th>Đầu vào còn thiếu</th></tr></thead>
+    <tbody><tr><td class="mono">AI-06</td><td><b>NAP chưa kiểm tính nhất quán</b></td>
+  <td class="n">4 h</td><td>S3</td>
+  <td>Mới đọc được phía website. Còn phải tra Google Business Profile và các trang mạng xã hội</td></tr><tr><td class="mono">KW-01</td><td><b>Intent mismatch — nội dung xếp hạng không phải money page</b></td>
+  <td class="n">8 h</td><td>S4</td>
+  <td>Cần bảng 9.708 từ khoá của Search Console, hiện chưa có trong hồ sơ audit.</td></tr><tr><td class="mono">KW-04</td><td><b>Striking distance chưa được khai thác</b></td>
+  <td class="n">4 h</td><td>S4</td>
+  <td>Cần bảng 9.708 từ khoá</td></tr><tr><td class="mono">KW-06</td><td><b>Content cluster yếu — average position ngoài trang 2</b></td>
+  <td class="n">6 h</td><td>S4</td>
+  <td>Cần bảng 9.708 từ khoá và bảng phân cụm 8 nhóm bệnh lý</td></tr><tr><td class="mono">TR-06</td><td><b>Core Web Vitals chưa kết luận được — thiếu CrUX field data</b></td>
+  <td class="n">—</td><td>Đo lại</td>
+  <td>Không có CrUX field data ở cả 7 URL lẫn cấp tên miền do lưu lượng chưa đủ ngưỡng. Lab data: TTFB cao nhất 246 ms (đạt), 5/7 trang mobile có LCP trên 8 giây.</td></tr></tbody></table></div>
+  <p class="lede" style="margin-top:10px">Ba hạng mục search intent và content cluster chờ đúng một đầu vào là bảng Organic keywords của Site Explorer, tổng 18 giờ trong Sprint 4. Có bảng đó là cả ba chuyển sang trạng thái sẵn sàng triển khai.</p>
+</section>
+
+<section id="roadmap">
+  <div class="sechead"><h2>Roadmap 4 sprint</h2><span class="tag">14/09 → 28/10/2026</span></div>
+  <p class="lede">Ngày công 8 giờ. Sprint 1 gấp ba ngày liền vì mỗi năm đang mất 2.228 click vào trang lỗi. Sau sprint cuối là 4 tuần chờ dữ liệu Google; đo trước 25/11 sẽ đọc ra số sai.</p>
+  <div class="sprints"><div class="sp"><div class="h">S1</div>
+      <div class="d">14/09/2026 – 16/09/2026</div>
+      <div class="g">Dọn rò rỉ traffic và mở đo lường</div>
+      <div class="mini"><i style="width:100%"></i></div>
+      <div class="meta">25 h trên năng lực 24 giờ · Người phụ trách SEO 23/24 h</div></div><div class="sp"><div class="h">S2</div>
+      <div class="d">17/09/2026 – 30/09/2026</div>
+      <div class="g">Dọn on-page và mở khai báo</div>
+      <div class="mini"><i style="width:46%"></i></div>
+      <div class="meta">37 h trên năng lực 80 giờ · Người viết nội dung 20/80 h</div></div><div class="sp"><div class="h">S3</div>
+      <div class="d">01/10/2026 – 14/10/2026</div>
+      <div class="g">Cấu trúc liên kết và khai báo dịch vụ</div>
+      <div class="mini"><i style="width:85%"></i></div>
+      <div class="meta">68 h trên năng lực 80 giờ · Người phụ trách SEO 32/80 h · Người viết nội dung 28/80 h</div></div><div class="sp"><div class="h">S4</div>
+      <div class="d">15/10/2026 – 28/10/2026</div>
+      <div class="g">Nội dung và nhóm đang bị chặn</div>
+      <div class="mini"><i style="width:88%"></i></div>
+      <div class="meta">70 h trên năng lực 80 giờ · Người viết nội dung 42/80 h</div></div><div class="sp"><div class="h">Cửa sổ đo lại</div>
+      <div class="d">29/10/2026 – 25/11/2026</div>
+      <div class="g">Cửa sổ đo lại — chờ dữ liệu Google</div>
+      <div class="mini"><i style="width:8%"></i></div>
+      <div class="meta">6 h, ngoài năng lực sprint · Người phụ trách SEO 6 h</div></div></div>
+  <div class="tbl" style="margin-top:14px"><table id="tb7"><thead><tr><th>Sprint</th><th>Hạng mục</th><th>Sản phẩm bàn giao</th><th>Điều kiện coi là xong</th></tr></thead>
+    <tbody><tr><td><b>S1</b></td><td>TR-14 · TR-01 · TR-04 · TR-08 · TR-02 · TR-15</td><td>83 broken URL đã cài 301 redirect · GA4 đếm được chuyển đổi · broken internal link đã dọn · XML sitemap sạch · đủ security header</td><td>Gọi lại 83 URL: 0 URL trả 404 · báo cáo chuyển đổi GA4 khác 0 · crawl lại: 0 broken internal link · sitemap_index còn 3 sitemap con · đủ 6/6 security header</td></tr><tr><td><b>S2</b></td><td>TR-10 · AI-02 · TR-16 · TR-12 · KW-09 · TR-11 · TR-05 · AI-04</td><td>898 ảnh có image alt attribute · mỗi trang đúng 1 H1 tag · XML sitemap khai thẻ ảnh · schema markup đúng loại cơ sở y tế · gỡ nofollow trên internal link</td><td>Tỷ lệ ảnh có image alt attribute 100% · 40/40 trang có đúng 1 H1 tag · Rich Results Test không báo lỗi · 0 internal link nofollow trừ link chức năng</td></tr><tr><td><b>S3</b></td><td>KW-03 · AI-03 · TR-03 · AI-09 · TR-17 · AI-06 · TR-13</td><td>18 trang dịch vụ liên kết ngang theo nhóm bệnh lý · có FAQPage schema · có outgoing link dẫn nguồn y khoa · NAP nhất quán · nén ảnh và rút gọn CSS</td><td>18/18 trang dịch vụ có contextual internal link đi ra · 18/18 có FAQPage schema hợp lệ · 18/18 có outgoing link dẫn nguồn y khoa · slow page còn tối đa 10</td></tr><tr><td><b>S4</b></td><td>KW-05 · KW-02 · AI-07 · AI-08 · AI-05 · AI-10 · KW-07 · KW-01 · KW-04 · KW-06</td><td>Viết lại title tag · dựng pillar page cho cụm bệnh lý · dựng trang thực thể · phân loại search intent · đo baseline hiện diện trên công cụ AI</td><td>Toàn bộ title tag ≤ 65 ký tự · mỗi content cluster có 1 pillar page · trang thực thể đã xuất bản · có baseline AI và 20 từ khoá cố định. Cần CD-07 và CD-08 được duyệt.</td></tr><tr><td><b>Đo lại</b></td><td>Nhóm chỉ số Kỳ vọng: average position · CTR · organic clicks vào trang dịch vụ · Core Web Vitals</td><td>Bản đo lần 1 của bảng KPI Tracking</td><td>Đủ 28 ngày dữ liệu sau sprint cuối mới đọc được. Đo trước là đọc ra số sai</td></tr></tbody></table></div>
+  <div class="flag red"><h4>Điều kiện để giữ được lịch này</h4>
+  <p>Sprint 1 chỉ chạy đủ nếu 83 đích redirect được duyệt trước 14/09. Sprint 2 cần trả lời trạng thái kinh doanh của 3 trang dịch vụ. Sprint 4 cần danh sách cụm từ pháp chế duyệt và tên bác sĩ chịu trách nhiệm chuyên môn, nếu không thì 42 giờ biên tập nội dung của Sprint 4 phải đẩy sang kỳ sau.</p></div>
+</section>
+
+<section id="kpi">
+  <div class="sechead"><h2>KPI &amp; đo lường</h2><span class="tag">23 chỉ số</span></div>
+  <p class="lede">Số nền chốt 08–10/09/2026. Loại <b>Cam kết</b> là chỉ số bộ phận SEO tự làm ra được và nhận trách nhiệm. Loại <b>Kỳ vọng</b> phụ thuộc Google hoặc bên thứ ba, chỉ theo dõi xu hướng. Mỗi lần đo lại phải lặp đúng cách đo ở cột cuối — đổi cách đo là số không so sánh được.</p>
+  <div class="tbl"><table id="tb8" class="clip" data-limit="12"><thead><tr><th>Chỉ số</th><th class="n">Số nền</th><th class="n">Mục tiêu</th><th>Loại</th><th>Chu kỳ</th><th>Cách đo</th></tr></thead>
+    <tbody><tr><td><b>Tỷ lệ click rơi vào trang 404</b></td><td class="n">28,4%</td><td class="n">0%</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Lấy click của 83 URL chia tổng click, cùng một bảng theo trang</td></tr><tr><td><b>Số URL đã xoá còn trả 404</b></td><td class="n">83</td><td class="n">0</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Gọi thật từng URL trong Redirect Map, đọc mã HTTP</td></tr><tr><td><b>Số broken internal link</b></td><td class="n">114 (Ahrefs) · 109 (site crawl)</td><td class="n">0</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Ahrefs Site Audit, báo cáo Links, lọc target trả 404. Đã loại link email-protection của Cloudflare.</td></tr><tr><td><b>Số sự kiện GA4 đánh dấu key event</b></td><td class="n">0</td><td class="n">ít nhất 1</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Đọc chỉ số keyEvents trong GA4</td></tr><tr><td><b>Số lượt gửi form mỗi tháng</b></td><td class="n">chưa dùng được</td><td class="n">chưa chốt</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Sau khi gộp tên sự kiện và chờ đủ 14 ngày mới lấy số</td></tr><tr><td><b>Tỷ lệ ảnh có image alt attribute</b></td><td class="n">33%</td><td class="n">100%</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Crawl lại, đếm thẻ img có alt không rỗng</td></tr><tr><td><b>Số trang có title tag trong ngưỡng 65 ký tự</b></td><td class="n">18/40</td><td class="n">40/40</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Đếm bằng ký tự, không đếm byte</td></tr><tr><td><b>Số trang dịch vụ có contextual internal link đi ra</b></td><td class="n">2/18</td><td class="n">18/18</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Crawl lại, tách vùng, chỉ đếm lớp thân bài</td></tr><tr><td><b>Số trang có đúng một thẻ H1</b></td><td class="n">34/40</td><td class="n">40/40</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Crawl lại, đếm thẻ h1</td></tr><tr><td><b>Số URL không phải nội dung trong sitemap</b></td><td class="n">19</td><td class="n">0</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Đếm URL trong sitemap_index</td></tr><tr><td><b>Số header bảo mật</b></td><td class="n">4/6</td><td class="n">6/6</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi quý</td><td>Đọc header trả về của trang chủ</td></tr><tr><td><b>Số bot AI truy cập được</b></td><td class="n">7/7</td><td class="n">7/7</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi quý</td><td>Gọi thật với từng danh tính bot</td></tr><tr><td><b>Số trang có khai báo dành cho cơ sở y tế</b></td><td class="n">0/40</td><td class="n">chưa chốt</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Crawl lại, bóc khối ld+json</td></tr><tr><td><b>Số link biên tập trỏ ra nguồn ngoài</b></td><td class="n">10</td><td class="n">chưa chốt</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Crawl lại, loại nút chia sẻ và nút liên hệ</td></tr><tr><td><b>Tổng click từ Google</b></td><td class="n">8.998 / 16 tháng</td><td class="n">tăng</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi sprint</td><td>Search Console, type=web, dataState=final, cắt URL tại dấu hỏi</td></tr><tr><td><b>Click vào 18 trang dịch vụ</b></td><td class="n">712 (7,9% tổng click)</td><td class="n">tăng tỷ trọng</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi sprint</td><td>Cộng click của nhóm trang dịch vụ</td></tr><tr><td><b>Average position — điện thoại</b></td><td class="n">17,57</td><td class="n">cải thiện</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi sprint</td><td>Trung bình có trọng số impressions, trên đường dẫn gốc</td></tr><tr><td><b>Average position — máy tính</b></td><td class="n">28,51</td><td class="n">cải thiện</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi sprint</td><td>Như trên</td></tr><tr><td><b>Số referring domain</b></td><td class="n">12</td><td class="n">chưa chốt</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi quý</td><td>Search Console mục Liên kết</td></tr><tr><td><b>Số trang dịch vụ có backlink</b></td><td class="n">1/18</td><td class="n">tăng</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi quý</td><td>Search Console mục Liên kết, phần trang được liên kết nhiều nhất</td></tr><tr><td><b>Tốc độ trên CrUX field data</b></td><td class="n">chưa đo</td><td class="n">Đạt</td>
+  <td><span class="sev n">Kỳ vọng</span></td><td>Mỗi sprint</td><td>PageSpeed API, kiểm cờ origin_fallback trước khi đọc số. Hiện chưa có dữ liệu CrUX</td></tr><tr><td><b>Tỷ lệ internal link nofollow</b></td><td class="n">21,9% (204/930)</td><td class="n">0%</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Ahrefs Site Audit, báo cáo Links, lọc nofollow trên link nội bộ</td></tr><tr><td><b>Số trang slow page</b></td><td class="n">36</td><td class="n">tối đa 10</td>
+  <td><span class="sev q">Cam kết</span></td><td>Mỗi sprint</td><td>Ahrefs Site Audit, nhóm Usability and performance</td></tr></tbody></table><div class="more"><button type="button" data-tbl="tb8">Xem thêm 11 dòng</button></div></div>
+  <div class="flag"><h4>4 chỉ số chưa đặt mức đích</h4>
+  <p>Số lượt gửi form mỗi tháng · Số trang có khai báo dành cho cơ sở y tế · Số link biên tập trỏ ra nguồn ngoài · Số referring domain.</p>
+  <p>Bốn chỉ số này chưa có số nền đáng tin để đặt đích: số lượt gửi form phải chờ gộp tên event và đủ 14 ngày dữ liệu sạch; ba chỉ số còn lại phụ thuộc khối lượng nội dung và internal link làm được trong hai sprint sau. Kỳ này chúng là chỉ số theo dõi xu hướng, đặt mức đích ở lần đo lại đầu tiên 25/11/2026. Hai chỉ số khác cũng chỉ theo dõi xu hướng vì phụ thuộc Google: share of voice của money pages (7,9%) và số money page có backlink (1/18).</p></div>
+</section>
+
+<section id="quyet-dinh">
+  <div class="sechead"><h2>Cần quyết định</h2><span class="tag">10 điểm đang mở</span></div>
+  <p class="lede">Bản này có thêm mục cần quyết định vì plan đang đứng chờ ở đây. Mỗi dòng đã ghi sẵn phương án mặc định của bộ phận SEO: duyệt phương án đó là thi công được ngay, không cần họp lại.</p>
+  <div class="tbl"><table id="tb9"><thead><tr><th>Mã</th><th>Điểm quyết định và bối cảnh đã đo</th><th class="n">Quy mô</th>
+    <th>Người quyết</th><th>Phương án mặc định</th><th>Ảnh hưởng</th></tr></thead><tbody><tr><td class="mono">CD-01</td>
+  <td><b>Đích 301 redirect cho cụm giảm mỡ và tạo hình</b><span class="sm">Không còn dịch vụ nào thuộc cụm này. Ba URL dịch vụ đều 404: huy-mo-cap-toc, cay-tinh-chat-huy-mo, cang-chi-collagen-4d-v-lift. Bốn URL còn lại là bài viết.</span></td>
+  <td class="n">7 URL · 204 clicks trong kỳ · 179 clicks/năm</td><td>Người phụ trách SEO + Ban lãnh đạo</td><td>301 redirect toàn bộ 7 URL về trang danh mục /dich-vu/</td>
+  <td><span class="sev w">Chặn S1</span></td></tr><tr><td class="mono">CD-02</td>
+  <td><b>Đích 301 redirect cho cụm sẹo rỗ và lăn kim</b><span class="sm">Cụm đứng thứ hai về lưu lượng nhưng không có dịch vụ trị sẹo rỗ hay lăn kim. Meso sinh học là dịch vụ tái tạo nền da, gần nghĩa nhất nhưng là kỹ thuật khác</span></td>
+  <td class="n">12 URL · 555 clicks trong kỳ · 486 clicks/năm</td><td>Người phụ trách SEO + Ban lãnh đạo</td><td>301 redirect về /dich-vu/meso-sinh-hoc/, đánh dấu độ tin cậy CẦN DUYỆT</td>
+  <td><span class="sev w">Chặn S1</span></td></tr><tr><td class="mono">CD-03</td>
+  <td><b>16 URL có đích gần nghĩa nhưng không trùng khít</b><span class="sm">Gồm các bài lăn kim, sẹo rỗ, PRP, hấp trắng baby face, cấy collagen, renew skin plus. Đường dẫn không nêu rõ bệnh lý hoặc không có dịch vụ trùng khít</span></td>
+  <td class="n">16 URL</td><td>Người phụ trách SEO</td><td>Giữ đích gần nghĩa nhất đã điền, độ tin cậy ghi CẦN DUYỆT</td>
+  <td><span class="sev w">Chặn S1</span></td></tr><tr><td class="mono">CD-04</td>
+  <td><b>Trang /dich-vu/glass-skin-peel/ mở index hay gỡ</b><span class="sm">URL trả 200 với nội dung đầy đủ nhưng gắn meta robots noindex nofollow, canonical rỗng, không có trong XML sitemap và ngoài tập index coverage đã kiểm.</span></td>
+  <td class="n">1 URL · 35.961 byte nội dung</td><td>Người phụ trách SEO</td><td>Gỡ meta robots noindex và đưa URL vào XML sitemap</td>
+  <td><span class="sev w">Chặn S2</span></td></tr><tr><td class="mono">CD-05</td>
+  <td><b>Hai trang dịch vụ 404 có phải đã ngừng kinh doanh không</b><span class="sm">Hai URL dịch vụ trả 404 nhưng vẫn nhận 33 internal link mỗi URL từ global template block. Cũng là đầu vào của TR-05 và AI-04.</span></td>
+  <td class="n">2 URL · 61 clicks/năm</td><td>Ban lãnh đạo</td><td>Chưa có phương án mặc định, chờ xác nhận trạng thái kinh doanh</td>
+  <td><span class="sev w">Chặn S2</span></td></tr><tr><td class="mono">CD-06</td>
+  <td><b>Tập đo chuẩn là 37 hay 40 trang</b> <span class="chip">đã chốt 09/09/2026</span><span class="sm">aqua-peeling-skin, oxygen-detox, glass-skin-peel đều trả 200 với nội dung đầy đủ nhưng có 0 click và 0 impression trong 418 ngày nên bị lọc khỏi tập 37 trang</span></td>
+  <td class="n">3 trang chênh lệch</td><td>Người phụ trách SEO</td><td>Tập đo chuẩn là 40 trang: 39 trang đã crawl và trang chuyên mục /tin-tuc-su-kien/tip-lam-dep/</td>
+  <td><span class="sev n">Không chặn</span></td></tr><tr><td class="mono">CD-07</td>
+  <td><b>Danh sách cụm từ cam kết tuyệt đối phải bỏ hoặc kèm điều kiện</b><span class="sm">Đang dùng: dứt điểm, tận gốc, vĩnh viễn. Nhóm này cho kết quả sớm nhất nhưng chưa viết lại được vì chưa có tiêu chí duyệt</span></td>
+  <td class="n">5 title tag đã đếm được</td><td>Ban lãnh đạo + Bộ phận pháp chế</td><td>Chưa có phương án mặc định, không tự quyết câu chữ y tế</td>
+  <td><span class="sev w">Chặn S4</span></td></tr><tr><td class="mono">CD-08</td>
+  <td><b>Bác sĩ chịu trách nhiệm chuyên môn</b><span class="sm">Cần tên, bằng cấp và sự đồng ý đứng tên. Gắn tên người không đọc bài là khai báo sai</span></td>
+  <td class="n">Chặn nhóm hạng mục E-E-A-T</td><td>Ban lãnh đạo</td><td>Chưa có phương án mặc định</td>
+  <td><span class="sev w">Chặn S4</span></td></tr><tr><td class="mono">CD-09</td>
+  <td><b>Loại schema markup cho trang dịch vụ</b><span class="sm">Toàn site không có MedicalClinic, MedicalBusiness, MedicalProcedure, Service, Physician hay FAQPage. Khai sai loại gây hại nhiều hơn không khai</span></td>
+  <td class="n">0/18 trang đang có</td><td>Người phụ trách SEO</td><td>Trang thực thể: đổi Organization thành MedicalClinic. Trang dịch vụ: chốt riêng loại cho trang bệnh lý và trang thẩm mỹ thuần</td>
+  <td><span class="sev w">Chặn S3</span></td></tr><tr><td class="mono">CD-10</td>
+  <td><b>Định nghĩa các khối bắt buộc của một trang dịch vụ</b><span class="sm">Chưa có định nghĩa nên chưa crawl đếm được. Chốt xong thì đo ra số trong một lượt</span></td>
+  <td class="n">Chặn KW-09</td><td>Người phụ trách SEO</td><td>Bốn khối: form đăng ký · giá hoặc cam kết · bác sĩ hoặc kỹ thuật viên thực hiện · quy trình và thời gian điều trị</td>
+  <td><span class="sev w">Chặn S2</span></td></tr><tr><td class="mono">CD-11</td>
+  <td><b>Danh sách 3–5 đối thủ trực tiếp</b><span class="sm">Không xác định được đối thủ trực tiếp của phòng khám từ dữ liệu đang có</span></td>
+  <td class="n">Chặn KW-08</td><td>Ban lãnh đạo</td><td>Chưa có phương án mặc định</td>
+  <td><span class="sev w">Chặn S4</span></td></tr></tbody></table></div>
+  <div class="flag red"><h4>Việc chờ lâu nhất: 83 đích 301 redirect</h4>
+  <p>Đích đề xuất đã điền đủ 83/83 dòng: 59 dòng CHẮC CHẮN — đích trùng bệnh lý, duyệt là cài được; 16 dòng CẦN DUYỆT vì đích gần nghĩa nhưng không trùng khít; 8 dòng CHƯA CÓ ĐÍCH vì không còn dịch vụ tương ứng, mặc định trỏ về trang danh mục. Khâu duyệt và cài ước 12 giờ, đã nằm trong Sprint 1.</p></div>
+</section>
+
+<section id="url404">
+  <div class="sechead"><h2>Phụ lục — 83 broken URL</h2><span class="tag">2.552 click · 490.076 impression</span></div>
+  <p class="lede">Đo 09/09/2026: lấy từ Search Console rồi gọi thật từng URL đọc mã HTTP. Xếp theo click giảm dần — 20 dòng đầu chiếm 89,7% click của cả nhóm.</p>
+  <h3 class="sub">Phân cụm theo bệnh lý</h3>
+  <div class="tbl"><table id="tb10"><thead><tr><th>Cluster bệnh lý</th><th class="n">Số URL</th><th class="n">Click</th>
+    <th class="n">Click/năm</th><th class="n">Impression</th><th class="n">Tỷ trọng</th><th>Đích 301 đề xuất</th></tr></thead>
+    <tbody><tr><td><b>Mụn</b></td><td class="n">27</td><td class="n">591</td>
+  <td class="n">519</td><td class="n">191.862</td><td class="n">23,2%</td>
+  <td>/dich-vu/tri-mun-acnes-peel/</td></tr><tr><td><b>Sẹo rỗ và tái tạo nền da</b></td><td class="n">12</td><td class="n">555</td>
+  <td class="n">486</td><td class="n">70.903</td><td class="n">21,7%</td>
+  <td>/dich-vu/meso-sinh-hoc/</td></tr><tr><td><b>Tắm trắng</b></td><td class="n">4</td><td class="n">537</td>
+  <td class="n">468</td><td class="n">28.396</td><td class="n">21,0%</td>
+  <td>/dich-vu/tam-trang-sua-non-collagen/</td></tr><tr><td><b>Nám và tàn nhang</b></td><td class="n">15</td><td class="n">331</td>
+  <td class="n">290</td><td class="n">134.009</td><td class="n">13,0%</td>
+  <td>/dich-vu/laser-matrix/</td></tr><tr><td><b>Viêm nang lông</b></td><td class="n">5</td><td class="n">267</td>
+  <td class="n">234</td><td class="n">25.974</td><td class="n">10,5%</td>
+  <td>/dich-vu/dieu-tri-viem-nang-long/</td></tr><tr><td><b>Giảm mỡ và tạo hình</b></td><td class="n">7</td><td class="n">204</td>
+  <td class="n">179</td><td class="n">30.386</td><td class="n">8,0%</td>
+  <td>/dich-vu/</td></tr><tr><td><b>Tóc</b></td><td class="n">1</td><td class="n">39</td>
+  <td class="n">34</td><td class="n">3.911</td><td class="n">1,5%</td>
+  <td>/dich-vu/</td></tr><tr><td><b>Trẻ hoá</b></td><td class="n">2</td><td class="n">22</td>
+  <td class="n">19</td><td class="n">1.693</td><td class="n">0,9%</td>
+  <td>/dich-vu/hifu-ultra-young/</td></tr><tr><td><b>Chăm sóc da</b></td><td class="n">1</td><td class="n">4</td>
+  <td class="n">3</td><td class="n">2.239</td><td class="n">0,2%</td>
+  <td>/dich-vu/oxygen-detox/</td></tr><tr><td><b>Phân trang</b></td><td class="n">9</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">703</td><td class="n">0,1%</td>
+  <td>/tin-tuc-su-kien/ · /tin-tuc-su-kien/tip-lam-dep/</td></tr></tbody></table></div>
+  <p class="lede" style="margin-top:10px">Ba cluster dẫn đầu — mụn, sẹo rỗ và tái tạo nền da, tắm trắng — chiếm 43 URL và 65,9% click của cả nhóm. Cluster sẹo rỗ và lăn kim hiện không có dịch vụ tương ứng đang bán — đó là lý do 16 dòng mang trạng thái CẦN DUYỆT.</p>
+  <h3 class="sub">Danh sách đầy đủ</h3>
+  <div class="filters"><input id="q404" type="search" placeholder="Tìm URL hoặc cluster" aria-label="Tìm trong danh sách"></div>
+  <div class="tbl"><table id="t404" class="clip" data-limit="15"><thead><tr><th>Broken URL</th><th>Cluster</th><th class="n">Click</th>
+    <th class="n">Click/năm</th><th class="n">Impression</th><th>Đích 301 đề xuất</th><th>Độ tin cậy</th></tr></thead>
+    <tbody><tr><td class="mono">/cach-tri-mun-chi/</td><td>Mụn</td><td class="n">303</td>
+  <td class="n">265</td><td class="n">5.807</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tam-trang-bang-bot-yen-mach/</td><td>Tắm trắng</td><td class="n">296</td>
+  <td class="n">258</td><td class="n">9.798</td><td class="mono">/dich-vu/tam-trang-sua-non-collagen/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/sau-khi-lan-kim-khong-nen-an-gi/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">192</td>
+  <td class="n">168</td><td class="n">18.891</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/tam-trang-toan-than-bang-trung-ga/</td><td>Tắm trắng</td><td class="n">175</td>
+  <td class="n">153</td><td class="n">6.257</td><td class="mono">/dich-vu/tam-trang-sua-non-collagen/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/giam-can-co-giup-mat-thon-gon-hay-khong/</td><td>Giảm mỡ và tạo hình</td><td class="n">169</td>
+  <td class="n">148</td><td class="n">18.992</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/lan-kim-gia-bao-nhieu/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">132</td>
+  <td class="n">115</td><td class="n">15.936</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/tri-viem-nang-long-bang-la-trau-khong/</td><td>Viêm nang lông</td><td class="n">129</td>
+  <td class="n">113</td><td class="n">12.865</td><td class="mono">/dich-vu/dieu-tri-viem-nang-long/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-nam-rau/</td><td>Nám và tàn nhang</td><td class="n">128</td>
+  <td class="n">112</td><td class="n">13.466</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/chi-phi-nan-mun-o-spa/</td><td>Mụn</td><td class="n">110</td>
+  <td class="n">96</td><td class="n">22.238</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/lam-kim-may-ngay-het-do/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">87</td>
+  <td class="n">76</td><td class="n">11.907</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/luu-y-sau-khi-lam-kim/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">86</td>
+  <td class="n">75</td><td class="n">6.209</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/tri-viem-nang-long-bang-laser-gia-bao-nhieu/</td><td>Viêm nang lông</td><td class="n">80</td>
+  <td class="n">70</td><td class="n">3.948</td><td class="mono">/dich-vu/dieu-tri-viem-nang-long/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-o-tran/</td><td>Mụn</td><td class="n">74</td>
+  <td class="n">65</td><td class="n">22.904</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/nam-chan-sau/</td><td>Nám và tàn nhang</td><td class="n">69</td>
+  <td class="n">60</td><td class="n">22.677</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tam-trang-bang-tra-xanh/</td><td>Tắm trắng</td><td class="n">61</td>
+  <td class="n">53</td><td class="n">10.699</td><td class="mono">/dich-vu/tam-trang-sua-non-collagen/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tri-viem-nang-long-bang-nha-dam/</td><td>Viêm nang lông</td><td class="n">50</td>
+  <td class="n">44</td><td class="n">2.318</td><td class="mono">/dich-vu/dieu-tri-viem-nang-long/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/dich-vu/tai-tao-mam-toc-nano-hair/</td><td>Tóc</td><td class="n">39</td>
+  <td class="n">34</td><td class="n">3.911</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/tri-nam-bang-laser-co-hieu-qua/</td><td>Nám và tàn nhang</td><td class="n">39</td>
+  <td class="n">34</td><td class="n">6.473</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/mun-moc-o-cam/</td><td>Mụn</td><td class="n">36</td>
+  <td class="n">31</td><td class="n">28.796</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/nam-da-mat-o-nam-gioi/</td><td>Nám và tàn nhang</td><td class="n">33</td>
+  <td class="n">29</td><td class="n">21.405</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/giam-mo-bung-nhanh-chong-tai-nha/</td><td>Giảm mỡ và tạo hình</td><td class="n">26</td>
+  <td class="n">23</td><td class="n">1.493</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/dich-vu/cay-collagen-nguyen-bao/</td><td>Trẻ hoá</td><td class="n">22</td>
+  <td class="n">19</td><td class="n">1.682</td><td class="mono">/dich-vu/hifu-ultra-young/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/cach-lap-day-seo-ro/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">19</td>
+  <td class="n">17</td><td class="n">7.789</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/cach-tri-mun-cho-ba-bau/</td><td>Mụn</td><td class="n">18</td>
+  <td class="n">16</td><td class="n">4.123</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tri-nam-bang-laser-bao-nhieu-tien/</td><td>Nám và tàn nhang</td><td class="n">18</td>
+  <td class="n">16</td><td class="n">2.749</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/bao-lau-lan-kim-1-lan/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">17</td>
+  <td class="n">15</td><td class="n">2.315</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/cach-tri-mun-thit-tren-mat/</td><td>Mụn</td><td class="n">13</td>
+  <td class="n">11</td><td class="n">2.682</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-nam-da-sau-sinh/</td><td>Nám và tàn nhang</td><td class="n">11</td>
+  <td class="n">10</td><td class="n">6.719</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cac-loai-seo-ro-thuong-gap/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">10</td>
+  <td class="n">9</td><td class="n">2.668</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/cach-nam-va-tan-nhang/</td><td>Nám và tàn nhang</td><td class="n">10</td>
+  <td class="n">9</td><td class="n">18.379</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/nam-da-la-gi/</td><td>Nám và tàn nhang</td><td class="n">7</td>
+  <td class="n">6</td><td class="n">16.701</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-giam-beo-mat-cho-nam-tai-nha/</td><td>Giảm mỡ và tạo hình</td><td class="n">6</td>
+  <td class="n">5</td><td class="n">5.923</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/dich-vu/hap-trang-baby-face/</td><td>Tắm trắng</td><td class="n">5</td>
+  <td class="n">4</td><td class="n">1.642</td><td class="mono">/dich-vu/tam-trang-sua-non-collagen/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/tri-seo-ro-bang-cong-nghe-prp/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">5</td>
+  <td class="n">4</td><td class="n">619</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/benh-viem-nang-long/</td><td>Viêm nang lông</td><td class="n">5</td>
+  <td class="n">4</td><td class="n">5.786</td><td class="mono">/dich-vu/dieu-tri-viem-nang-long/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/lieu-trinh-lan-kim-tri-mun-bao-nhieu-lan-thi-co-ket-qua/</td><td>Mụn</td><td class="n">5</td>
+  <td class="n">4</td><td class="n">3.233</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cham-soc-da-mat-bi-nam-tai-nha/</td><td>Nám và tàn nhang</td><td class="n">4</td>
+  <td class="n">3</td><td class="n">5.552</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-boc/</td><td>Mụn</td><td class="n">4</td>
+  <td class="n">3</td><td class="n">18.724</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tan-nhang-la-gi/</td><td>Nám và tàn nhang</td><td class="n">4</td>
+  <td class="n">3</td><td class="n">12.678</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/dich-vu/renew-skin-plus/</td><td>Chăm sóc da</td><td class="n">4</td>
+  <td class="n">3</td><td class="n">2.239</td><td class="mono">/dich-vu/oxygen-detox/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/phan-biet-nam-va-tan-nhang/</td><td>Nám và tàn nhang</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">3.505</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/viem-nang-long-o-lung/</td><td>Viêm nang lông</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">1.057</td><td class="mono">/dich-vu/dieu-tri-viem-nang-long/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-sau-sinh/</td><td>Mụn</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">598</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-boc-o-tran/</td><td>Mụn</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">3.751</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-cho-nam-gioi-tai-nha/</td><td>Mụn</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">3.166</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/dich-vu/dieu-tri-seo-ro-bang-prp/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">191</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/phan-biet-cac-loai-mun-thuong-gap/</td><td>Mụn</td><td class="n">3</td>
+  <td class="n">3</td><td class="n">10.341</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/seo-ro-la-gi/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">2.316</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/cach-giam-beo-mat/</td><td>Giảm mỡ và tạo hình</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">3.526</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/cach-tri-mun-boc-o-cam/</td><td>Mụn</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">13.350</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cac-buoc-cham-soc-da-mun-hang-ngay/</td><td>Mụn</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">893</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-tham-mun/</td><td>Mụn</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">2.354</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/dich-vu/dieu-tri-nam-tan-nhang/</td><td>Nám và tàn nhang</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">58</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/review-dich-vu-tri-nam-tan-nhang/</td><td>Nám và tàn nhang</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">522</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tac-dung-cua-lan-kim-da-mat/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">2.061</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/lay-nhan-mun-tai-nha/</td><td>Mụn</td><td class="n">2</td>
+  <td class="n">2</td><td class="n">1.740</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-an-duoi-da/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">9.036</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-cam-o-mui-cam/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">2.164</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-cam-o-mui-tai-nha/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">2.143</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/page/9/</td><td>Phân trang</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">164</td><td class="mono">/tin-tuc-su-kien/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-dau-den/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">3.899</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/co-nen-di-spa-nan-mun-khong/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">3.403</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-tri-mun-lung-tai-nha/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">5.899</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/dich-vu/huy-mo-cap-toc/</td><td>Giảm mỡ và tạo hình</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">300</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/nam-hon-hop-la-gi/</td><td>Nám và tàn nhang</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">820</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/lan-kim-tri-mun-co-hieu-qua-khong/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">2.559</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/moc-mun-quanh-mieng/</td><td>Mụn</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">3.133</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/page/8/</td><td>Phân trang</td><td class="n">1</td>
+  <td class="n">1</td><td class="n">134</td><td class="mono">/tin-tuc-su-kien/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/cach-dieu-tri-mun/</td><td>Mụn</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">2.907</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/lam-prp-co-dau-khong/</td><td>Sẹo rỗ và tái tạo nền da</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">1</td><td class="mono">/dich-vu/meso-sinh-hoc/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/giam-mo-bung-cho-nam-trong-1-tuan/</td><td>Giảm mỡ và tạo hình</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">151</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/cach-tri-nam-mang/</td><td>Nám và tàn nhang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">2.305</td><td class="mono">/dich-vu/laser-matrix/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/co-nen-tu-nan-mun-khong/</td><td>Mụn</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">3.924</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/dich-vu/cang-chi-collagen-4d-v-lift/</td><td>Trẻ hoá</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">11</td><td class="mono">/dich-vu/hifu-ultra-young/</td>
+  <td><span class="sev w">Cần duyệt</span></td></tr><tr><td class="mono">/dich-vu/cay-tinh-chat-huy-mo/</td><td>Giảm mỡ và tạo hình</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">1</td><td class="mono">/dich-vu/</td>
+  <td><span class="sev n">Chưa có đích</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/page/5/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">7</td><td class="mono">/tin-tuc-su-kien/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/tip-lam-dep/page/6/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">4</td><td class="mono">/tin-tuc-su-kien/tip-lam-dep/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc/page/8/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">377</td><td class="mono">/tin-tuc-su-kien/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/tip-lam-dep/page/3/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">4</td><td class="mono">/tin-tuc-su-kien/tip-lam-dep/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/tip-lam-dep/page/2/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">8</td><td class="mono">/tin-tuc-su-kien/tip-lam-dep/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/page/7/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">4</td><td class="mono">/tin-tuc-su-kien/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tin-tuc-su-kien/tip-lam-dep/page/5/</td><td>Phân trang</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">1</td><td class="mono">/tin-tuc-su-kien/tip-lam-dep/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr><tr><td class="mono">/tri-mun-boc-o-mui-tai-nha/</td><td>Mụn</td><td class="n">0</td>
+  <td class="n">0</td><td class="n">8.095</td><td class="mono">/dich-vu/tri-mun-acnes-peel/</td>
+  <td><span class="sev q">Chắc chắn</span></td></tr></tbody></table><div class="more"><button type="button" data-tbl="t404">Xem thêm 68 dòng</button></div></div>
+</section>
+
+<section id="money">
+  <div class="sechead"><h2>Phụ lục — 18 money pages</h2><span class="tag">712 click · 7,9%</span></div>
+  <p class="lede">Ghép on-page đo 08/09/2026 với Search Console kỳ 16 tháng. Contextual internal link chỉ tính ở lớp thân bài, đã loại menu và footer.</p>
+  <div class="tbl"><table id="tb11" class="clip" data-limit="12"><thead><tr><th>URL</th><th class="n">Ký tự title</th><th class="n">Số từ</th><th class="n">Click</th>
+    <th class="n">Impression</th><th class="n">Avg position</th><th class="n">Link nhận</th><th class="n">Link đi ra</th>
+    <th>Index coverage</th></tr></thead><tbody><tr><td class="mono">/dich-vu/triet-long-vinh-vien/</td><td class="n">74</td><td class="n">826</td>
+  <td class="n">120</td><td class="n">4.568</td><td class="n">10.4</td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/tri-hoi-nach-laser-nano-plus/</td><td class="n">58</td><td class="n">717</td>
+  <td class="n">114</td><td class="n">6.716</td><td class="n">7.1</td><td class="n">1</td>
+  <td class="n">1</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/tri-mun-acnes-peel/</td><td class="n">98</td><td class="n">1.834</td>
+  <td class="n">111</td><td class="n">5.970</td><td class="n">7.4</td><td class="n">3</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/dieu-tri-tham-nach-mong-ben/</td><td class="n">68</td><td class="n">757</td>
+  <td class="n">79</td><td class="n">7.213</td><td class="n">20.4</td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/triet-long-cong-nghe-cao-diode-laser/</td><td class="n">76</td><td class="n">818</td>
+  <td class="n">53</td><td class="n">6.111</td><td class="n">14.3</td><td class="n">1</td>
+  <td class="n">1</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/hifu-ultra-young/</td><td class="n">74</td><td class="n">709</td>
+  <td class="n">47</td><td class="n">2.227</td><td class="n">14</td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/laser-matrix/</td><td class="n">60</td><td class="n">1.015</td>
+  <td class="n">46</td><td class="n">985</td><td class="n">5.9</td><td class="n">2</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/fast-ultra-plus-khoa-hoi-nach/</td><td class="n">115</td><td class="n">1.510</td>
+  <td class="n">37</td><td class="n">708</td><td class="n">5.3</td><td class="n">2</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/dieu-tri-viem-nang-long/</td><td class="n">97</td><td class="n">1.329</td>
+  <td class="n">31</td><td class="n">663</td><td class="n">5.2</td><td class="n">2</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/tam-trang-tinh-chat-vang-nano-24k/</td><td class="n">66</td><td class="n">723</td>
+  <td class="n">19</td><td class="n">2.572</td><td class="n">11.9</td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu-dieu-tri-viem-da-co-dia-tu-goc/</td><td class="n">92</td><td class="n">1.794</td>
+  <td class="n">17</td><td class="n">497</td><td class="n">9.3</td><td class="n">2</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/peel-sinh-hoc-tham-body/</td><td class="n">69</td><td class="n">1.109</td>
+  <td class="n">16</td><td class="n">421</td><td class="n">7.2</td><td class="n">2</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/tre-hoa-da-new-ultherapy/</td><td class="n">65</td><td class="n">854</td>
+  <td class="n">11</td><td class="n">1.865</td><td class="n">54</td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/meso-sinh-hoc/</td><td class="n">76</td><td class="n">1.134</td>
+  <td class="n">8</td><td class="n">261</td><td class="n">4.3</td><td class="n">2</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/tam-trang-sua-non-collagen/</td><td class="n">72</td><td class="n">858</td>
+  <td class="n">3</td><td class="n">569</td><td class="n">17.6</td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr><tr><td class="mono">/dich-vu/aqua-peeling-skin/</td><td class="n">71</td><td class="n">1.352</td>
+  <td class="n">0</td><td class="n">0</td><td class="n"></td><td class="n">1</td>
+  <td class="n">0</td><td>Không tìm thấy (404)</td></tr><tr><td class="mono">/dich-vu/glass-skin-peel/</td><td class="n">67</td><td class="n">1.351</td>
+  <td class="n">0</td><td class="n">0</td><td class="n"></td><td class="n">1</td>
+  <td class="n">0</td><td>không có trong tập index coverage đã kiểm</td></tr><tr><td class="mono">/dich-vu/oxygen-detox/</td><td class="n">56</td><td class="n">1.205</td>
+  <td class="n">0</td><td class="n">0</td><td class="n"></td><td class="n">1</td>
+  <td class="n">0</td><td>Đã được gửi và lập chỉ mục</td></tr></tbody></table><div class="more"><button type="button" data-tbl="tb11">Xem thêm 6 dòng</button></div></div>
+  <div class="two">
+    <div class="quad"><h4>Contextual link đi ra gần như bằng 0</h4>
+      <div class="q-sub">2/18 trang</div>
+      <p style="font-size:12.5px;margin:0">Người đọc xong một trang dịch vụ không có đường sang dịch vụ cùng cluster bệnh lý, Google cũng không nhận được tín hiệu để hiểu các trang này liên quan nhau. Hạng mục 12 giờ trong Sprint 3.</p></div>
+    <div class="quad"><h4>Ba trang không nhận click nào</h4>
+      <div class="q-sub">trong 418 ngày</div>
+      <p style="font-size:12.5px;margin:0">Một trang bị chặn bằng meta robots noindex, đang chờ quyết định. Một trang được Search Console báo 404 nhưng gọi thật trả 200 với 1.352 từ — việc đúng là yêu cầu lập chỉ mục lại, tuyệt đối không đưa vào bảng 301 redirect.</p></div>
+  </div>
+</section>
+
+<section id="nguon">
+  <div class="sechead"><h2>Nguồn dữ liệu</h2><span class="tag">đo 08–10/09/2026</span></div>
+  <p class="lede">Mỗi con số trong bản này đều gọi được nguồn. Chỗ nào chưa đo thì ghi thẳng là chưa đo.</p>
+  <div class="two">
+    <div class="quad"><h4>Nguồn số</h4>
+      <ul><li><b>Google Search Console</b> — kỳ 16/07/2025 → 06/09/2026, 418 ngày, type=web, dataState=final</li>
+      <li><b>Google Analytics 4</b> — kỳ 06/05/2025 → 06/09/2026, đọc qua Data API 09/09/2026</li>
+      <li><b>Site crawl nội bộ</b> — 08–09/09/2026, tập chuẩn 40 trang</li>
+      <li><b>Ahrefs Site Audit</b> — crawl 115 URL ngày 10/09/2026</li>
+      <li><b>PageSpeed Insights API</b> — 09/09/2026, 7 URL, hai loại thiết bị</li></ul></div>
+    <div class="quad"><h4>Hai nguồn không cộng gộp với nhau</h4>
+      <div class="q-sub">Ahrefs và site crawl định nghĩa khác nhau ở bốn chỗ</div>
+      <ul><li>Broken internal link: 114 link / 46 đích so với 109 link / 44 đích</li>
+      <li>Orphan page: 1 so với 5 — Ahrefs đếm trang không có internal link nào, site crawl đếm trang không nhận link ở thân bài</li>
+      <li>Title too long: 17 so với 22 — Ahrefs đo theo pixel, site crawl đếm ký tự</li>
+      <li>H1 lỗi: 3 thiếu + 3 thừa so với 2 thiếu + 4 thừa</li></ul></div>
+  </div>
+  <h3 class="sub">Ahrefs Site Audit — crawl 10/09/2026</h3>
+  <div class="tbl"><table id="tb12" class="clip" data-limit="12"><thead><tr><th>Nhóm</th><th>Issue</th><th class="n">Số URL</th><th>Mức độ</th><th>Đối chiếu với site crawl</th></tr></thead>
+    <tbody><tr><td>Indexability</td><td><b>404 page</b></td><td class="n">47</td>
+  <td><span class="sev e">Error</span></td><td>Ahrefs chỉ thấy URL có internal link trỏ tới. 83 URL 404 trong Redirect Map lấy từ Search Console, tập khác.</td></tr><tr><td>Indexability</td><td><b>4XX page</b></td><td class="n">47</td>
+  <td><span class="sev e">Error</span></td><td>Trùng với nhóm 404 page.</td></tr><tr><td>Indexability</td><td><b>Noindex page</b></td><td class="n">1</td>
+  <td><span class="sev w">Warning</span></td><td>Là /tin-tuc-su-kien/tip-lam-dep/, chặn noindex có chủ đích.</td></tr><tr><td>Indexability</td><td><b>Nofollow page</b></td><td class="n">1</td>
+  <td><span class="sev w">Warning</span></td><td>Là /dich-vu/glass-skin-peel/, đang chờ CD-04.</td></tr><tr><td>Indexability</td><td><b>Noindex and nofollow page</b></td><td class="n">1</td>
+  <td><span class="sev n">Notice</span></td><td>Trùng hai dòng trên.</td></tr><tr><td>AI Discoverability</td><td><b>Slow server response for AI crawlers</b></td><td class="n">2</td>
+  <td><span class="sev w">Warning</span></td><td>Chỉ tiêu mới, site crawl nội bộ chưa đo. Bot AI vẫn truy cập được 7/7.</td></tr><tr><td>Links</td><td><b>Page has links to broken page</b></td><td class="n">40</td>
+  <td><span class="sev e">Error</span></td><td>40/40 trang đều có link hỏng. Site crawl đếm 114 link tới 46 đích.</td></tr><tr><td>Links</td><td><b>Orphan page (has no incoming internal links)</b></td><td class="n">1</td>
+  <td><span class="sev e">Error</span></td><td>Site crawl đếm 5 trang không nhận contextual internal link ở thân bài, cách đo khác.</td></tr><tr><td>Links</td><td><b>Page has links to redirect</b></td><td class="n">40</td>
+  <td><span class="sev w">Warning</span></td><td>Site crawl đếm 45 link trỏ vào 5 đích redirect.</td></tr><tr><td>Links</td><td><b>Page has nofollow outgoing internal links</b></td><td class="n">40</td>
+  <td><span class="sev n">Notice</span></td><td>204/930 internal link mang nofollow. Chỉ tiêu mới.</td></tr><tr><td>Links</td><td><b>Page has only one dofollow incoming internal link</b></td><td class="n">11</td>
+  <td><span class="sev n">Notice</span></td><td>11 trang chỉ nhận đúng 1 internal link dofollow.</td></tr><tr><td>Links</td><td><b>Page has nofollow and dofollow incoming internal links</b></td><td class="n">16</td>
+  <td><span class="sev n">Notice</span></td><td>—</td></tr><tr><td>Links</td><td><b>Redirected page has no incoming internal links</b></td><td class="n">1</td>
+  <td><span class="sev w">Warning</span></td><td>—</td></tr><tr><td>Redirects</td><td><b>3XX redirect</b></td><td class="n">7</td>
+  <td><span class="sev w">Warning</span></td><td>Site crawl đếm 2 internal link đi qua redirect chain.</td></tr><tr><td>Redirects</td><td><b>HTTP to HTTPS redirect</b></td><td class="n">2</td>
+  <td><span class="sev n">Notice</span></td><td>2 URL bản www chuyển hướng về HTTPS.</td></tr><tr><td>Content</td><td><b>Title too long</b></td><td class="n">17</td>
+  <td><span class="sev w">Warning</span></td><td>Ahrefs dùng ngưỡng pixel; site crawl đếm 22/40 trang vượt 65 ký tự. Hai ngưỡng khác nhau.</td></tr><tr><td>Content</td><td><b>Meta description tag missing or empty</b></td><td class="n">4</td>
+  <td><span class="sev w">Warning</span></td><td>Khớp với site crawl: 4 trang thiếu meta description.</td></tr><tr><td>Content</td><td><b>Meta description too short</b></td><td class="n">4</td>
+  <td><span class="sev w">Warning</span></td><td>Chỉ tiêu mới, site crawl chỉ đếm thiếu hay có.</td></tr><tr><td>Content</td><td><b>H1 tag missing or empty</b></td><td class="n">3</td>
+  <td><span class="sev w">Warning</span></td><td>Site crawl đếm 2 trang thiếu H1. Chênh 1 trang, dùng số Ahrefs.</td></tr><tr><td>Content</td><td><b>Multiple H1 tags</b></td><td class="n">3</td>
+  <td><span class="sev n">Notice</span></td><td>Site crawl đếm 4 trang thừa H1. Chênh 1 trang, dùng số Ahrefs.</td></tr><tr><td>Content</td><td><b>Page and SERP titles do not match</b></td><td class="n">7</td>
+  <td><span class="sev n">Notice</span></td><td>Chỉ tiêu mới: 7 trang có title hiển thị trên SERP khác title khai trong mã.</td></tr><tr><td>Usability and performance</td><td><b>Slow page</b></td><td class="n">36</td>
+  <td><span class="sev w">Warning</span></td><td>36/41 trang tải chậm. Bổ sung cho TR-06 vốn không có CrUX field data.</td></tr><tr><td>Images</td><td><b>Image file size too large</b></td><td class="n">25</td>
+  <td><span class="sev e">Error</span></td><td>Chỉ tiêu mới. Ahrefs crawl 267 file ảnh, 174 file thiếu image alt attribute.</td></tr><tr><td>CSS</td><td><b>CSS file size too large</b></td><td class="n">1</td>
+  <td><span class="sev w">Warning</span></td><td>Chỉ tiêu mới.</td></tr><tr><td>Sitemaps</td><td><b>Indexable page not in sitemap</b></td><td class="n">2</td>
+  <td><span class="sev n">Notice</span></td><td>2 trang được lập chỉ mục nhưng chưa khai trong XML sitemap.</td></tr><tr><td>External pages</td><td><b>External 4XX</b></td><td class="n">2</td>
+  <td><span class="sev n">Notice</span></td><td>2 link trỏ ra ngoài tới trang lỗi.</td></tr><tr><td>External pages</td><td><b>External 3XX redirect</b></td><td class="n">1</td>
+  <td><span class="sev n">Notice</span></td><td>—</td></tr></tbody></table><div class="more"><button type="button" data-tbl="tb12">Xem thêm 15 dòng</button></div></div>
+  <div class="flag red"><h4>Bốn lưu ý bắt buộc khi thi công</h4>
+    <p><b>1.</b> URL /dich-vu/aqua-peeling-skin/ tuyệt đối không 301 redirect. Search Console báo 404 nhưng gọi thật trả 200 với 1.352 từ. Việc đúng là dùng URL Inspection và yêu cầu lập chỉ mục lại.</p>
+    <p><b>2.</b> Ba việc GA4 phải đúng thứ tự: bật key event trước, gửi thử form đếm số event bắn ra, gộp tên event sau cùng. Sau khi gộp chờ tối thiểu 14 ngày mới có số sạch.</p>
+    <p><b>3.</b> Trang chuyên mục /tin-tuc-su-kien/tip-lam-dep/ chặn noindex là cố ý, không tính là lỗi, không xử lý.</p>
+    <p><b>4.</b> Không gộp số Ahrefs với số site crawl nội bộ ở bốn chỗ nêu trên; mỗi lần đo lại phải lặp đúng nguồn đã dùng cho số nền.</p></div>
+  <div class="flag"><h4>Phần chưa đo được trong kỳ này</h4>
+    <p><b>Core Web Vitals:</b> không có CrUX field data vì lưu lượng chưa đủ ngưỡng. Không kết luận đạt hay trượt. Lab data chỉ dùng tìm nguyên nhân: 36/41 slow page, 5/7 URL mobile có LCP trên 8 giây.</p>
+    <p><b>Chỉ số thẩm quyền tên miền:</b> đã bỏ khỏi bộ theo dõi ngày 09/09/2026 vì không mua công cụ trả phí.</p>
+    <p><b>Bảng Organic keywords của Site Explorer:</b> chưa lấy. Ba hạng mục search intent và content cluster chờ đầu vào này, 18 giờ đã ước lượng sẵn trong Sprint 4. AI Overview tracking chỉ cần tập 20 từ khoá cố định, chọn tay từ Search Console là chạy được.</p></div>
+  <footer>Taza Skin Clinic — plan xử lý sau audit SEO. Dữ liệu đo 08–10/09/2026, chưa triển khai thay đổi nào trên môi trường thật. Bản trình duyệt, chưa được Ban lãnh đạo phê duyệt.</footer>
+</section>
+</main></div>
+
+<script>
+(function(){
+  function rowsOf(t){return [].slice.call(t.querySelectorAll('tbody tr'));}
+  function applyClip(t){
+    var lim=+t.dataset.limit, exp=t.dataset.exp==='1';
+    var vis=rowsOf(t).filter(function(r){return !r.classList.contains('hid');});
+    rowsOf(t).forEach(function(r){r.style.display='none';});
+    vis.forEach(function(r,i){if(exp||i<lim)r.style.display='';});
+    var btn=document.querySelector('.more button[data-tbl="'+t.id+'"]');
+    if(!btn)return;
+    var hidden=vis.length-lim;
+    if(hidden<=0&&!exp){btn.parentNode.style.display='none';}
+    else{btn.parentNode.style.display='';btn.textContent=exp?'Thu gọn':'Xem thêm '+hidden+' dòng';}
+  }
+  document.querySelectorAll('table.clip').forEach(function(t){applyClip(t);});
+  document.querySelectorAll('.more button').forEach(function(b){b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.tbl);
+    t.dataset.exp=t.dataset.exp==='1'?'0':'1';
+    applyClip(t);
+    if(t.dataset.exp!=='1')t.scrollIntoView({block:'nearest'});
+  });});
+
+  var st={axis:'all',status:'all'},bl=document.getElementById('backlog'),c=document.getElementById('cnt');
+  function ap(){var n=0;rowsOf(bl).forEach(function(r){
+    var ok=(st.axis==='all'||r.dataset.axis===st.axis)&&(st.status==='all'||r.dataset.status===st.status);
+    r.classList.toggle('hid',!ok);if(ok)n++;});
+    c.textContent=n+' hạng mục';applyClip(bl);}
+  document.querySelectorAll('.filters button').forEach(function(b){b.addEventListener('click',function(){
+    var f=b.dataset.f;document.querySelectorAll('.filters button[data-f="'+f+'"]').forEach(function(o){o.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');st[f]=b.dataset.v;ap();});});
+
+  var q=document.getElementById('q404');
+  if(q)q.addEventListener('input',function(){var v=q.value.toLowerCase(),t=document.getElementById('t404');
+    rowsOf(t).forEach(function(r){r.classList.toggle('hid',r.textContent.toLowerCase().indexOf(v)===-1);});
+    if(v)t.dataset.exp='1';applyClip(t);});
+
+  var links=[].slice.call(document.querySelectorAll('nav.side a')),secs=links.map(function(a){return document.getElementById(a.dataset.t);});
+  function spy(){var y=window.scrollY+140,i=0;secs.forEach(function(s,k){if(s&&s.getBoundingClientRect().top+window.scrollY<=y)i=k;});
+    links.forEach(function(a,k){a.classList.toggle('on',k===i);});}
+  window.addEventListener('scroll',spy,{passive:true});spy();
+})();
+</script>
+</body></html>
