@@ -190,6 +190,10 @@
   @media (max-width:1200px){.cards.g3{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:760px){.cards,.cards.g3{grid-template-columns:1fr}}
   .hb{grid-template-columns:250px 1fr 110px}
+  .sp .barlbl{font-size:12px; color:var(--ink); margin-top:10px}
+  .sp .barlbl b{font-weight:700; color:var(--navy)}
+  .sp .mini{margin-top:5px}
+  .sp .h{font-size:12px; letter-spacing:.04em; text-transform:none}
   .more{border-top:1px solid var(--line); background:var(--wash); text-align:center; padding:9px}
   .more button{font:inherit; font-size:12.5px; font-weight:600; color:var(--navy); background:#fff;
     border:1px solid var(--line); border-radius:20px; padding:5px 16px; cursor:pointer}
@@ -747,29 +751,35 @@
 <section id="roadmap">
   <div class="sechead"><h2>Roadmap 4 sprint</h2><span class="tag">14/09 → 28/10/2026</span></div>
   <p class="lede">Ngày công 8 giờ. Sprint 1 gấp ba ngày liền vì mỗi năm đang mất 2.228 click vào trang lỗi. Sau sprint cuối là 4 tuần chờ dữ liệu Google; đo trước 25/11 sẽ đọc ra số sai.</p>
-  <div class="sprints"><div class="sp"><div class="h">S1</div>
-      <div class="d">14/09/2026 – 16/09/2026</div>
+  <p class="lede">Thanh ngang trong mỗi ô là mức lấp đầy: số giờ đã xếp việc so với số giờ hai vai trò làm được trong sprint đó. Thanh xanh là còn chỗ trống, vàng là gần kín, đỏ là đã kín, không nhận thêm việc phát sinh.</p>
+  <div class="sprints"><div class="sp"><div class="h">S1 · 14/09 – 16/09</div>
+      <div class="d">3 ngày công · 8 giờ/ngày</div>
       <div class="g">Dọn rò rỉ traffic và mở đo lường</div>
-      <div class="mini"><i style="width:100%"></i></div>
-      <div class="meta">25 h trên năng lực 24 giờ · Người phụ trách SEO 23/24 h</div></div><div class="sp"><div class="h">S2</div>
-      <div class="d">17/09/2026 – 30/09/2026</div>
+      <div class="barlbl">Đã xếp <b>25 giờ</b> trên năng lực 24 giờ · 104%</div><div class="mini"><i style="width:100%;background:var(--err)"></i></div>
+      <div class="meta">Người phụ trách SEO 23/24 h</div></div><div class="sp"><div class="h">S2 · 17/09 – 30/09</div>
+      <div class="d">10 ngày công · 8 giờ/ngày</div>
       <div class="g">Dọn on-page và mở khai báo</div>
-      <div class="mini"><i style="width:46%"></i></div>
-      <div class="meta">37 h trên năng lực 80 giờ · Người viết nội dung 20/80 h</div></div><div class="sp"><div class="h">S3</div>
-      <div class="d">01/10/2026 – 14/10/2026</div>
+      <div class="barlbl">Đã xếp <b>37 giờ</b> trên năng lực 80 giờ · 46%</div><div class="mini"><i style="width:46%;background:var(--blue)"></i></div>
+      <div class="meta">Người viết nội dung 20/80 h</div></div><div class="sp"><div class="h">S3 · 01/10 – 14/10</div>
+      <div class="d">10 ngày công · 8 giờ/ngày</div>
       <div class="g">Cấu trúc liên kết và khai báo dịch vụ</div>
-      <div class="mini"><i style="width:85%"></i></div>
-      <div class="meta">68 h trên năng lực 80 giờ · Người phụ trách SEO 32/80 h · Người viết nội dung 28/80 h</div></div><div class="sp"><div class="h">S4</div>
-      <div class="d">15/10/2026 – 28/10/2026</div>
+      <div class="barlbl">Đã xếp <b>68 giờ</b> trên năng lực 80 giờ · 85%</div><div class="mini"><i style="width:85%;background:var(--warn)"></i></div>
+      <div class="meta">Người phụ trách SEO 32/80 h · Người viết nội dung 28/80 h</div></div><div class="sp"><div class="h">S4 · 15/10 – 28/10</div>
+      <div class="d">10 ngày công · 8 giờ/ngày</div>
       <div class="g">Nội dung và nhóm đang bị chặn</div>
-      <div class="mini"><i style="width:88%"></i></div>
-      <div class="meta">70 h trên năng lực 80 giờ · Người viết nội dung 42/80 h</div></div><div class="sp"><div class="h">Cửa sổ đo lại</div>
-      <div class="d">29/10/2026 – 25/11/2026</div>
+      <div class="barlbl">Đã xếp <b>70 giờ</b> trên năng lực 80 giờ · 88%</div><div class="mini"><i style="width:88%;background:var(--warn)"></i></div>
+      <div class="meta">Người viết nội dung 42/80 h</div></div><div class="sp"><div class="h">Đo lại · 29/10 – 25/11</div>
+      <div class="d">4 tuần chờ dữ liệu Google, không thi công</div>
       <div class="g">Cửa sổ đo lại — chờ dữ liệu Google</div>
-      <div class="mini"><i style="width:8%"></i></div>
-      <div class="meta">6 h, ngoài năng lực sprint · Người phụ trách SEO 6 h</div></div></div>
+      <div class="barlbl">Đã xếp <b>6 giờ</b> đọc số, ngoài năng lực sprint</div>
+      <div class="meta">Người phụ trách SEO 6 h</div></div></div>
   <div class="tbl" style="margin-top:14px"><table id="tb7"><thead><tr><th>Sprint</th><th>Hạng mục</th><th>Sản phẩm bàn giao</th><th>Điều kiện coi là xong</th></tr></thead>
-    <tbody><tr><td><b>S1</b></td><td>TR-14 · TR-01 · TR-04 · TR-08 · TR-02 · TR-15</td><td>83 broken URL đã cài 301 redirect · GA4 đếm được chuyển đổi · broken internal link đã dọn · XML sitemap sạch · đủ security header</td><td>Gọi lại 83 URL: 0 URL trả 404 · báo cáo chuyển đổi GA4 khác 0 · crawl lại: 0 broken internal link · sitemap_index còn 3 sitemap con · đủ 6/6 security header</td></tr><tr><td><b>S2</b></td><td>TR-10 · AI-02 · TR-16 · TR-12 · KW-09 · TR-11 · TR-05 · AI-04</td><td>898 ảnh có image alt attribute · mỗi trang đúng 1 H1 tag · XML sitemap khai thẻ ảnh · schema markup đúng loại cơ sở y tế · gỡ nofollow trên internal link</td><td>Tỷ lệ ảnh có image alt attribute 100% · 40/40 trang có đúng 1 H1 tag · Rich Results Test không báo lỗi · 0 internal link nofollow trừ link chức năng</td></tr><tr><td><b>S3</b></td><td>KW-03 · AI-03 · TR-03 · AI-09 · TR-17 · AI-06 · TR-13</td><td>18 trang dịch vụ liên kết ngang theo nhóm bệnh lý · có FAQPage schema · có outgoing link dẫn nguồn y khoa · NAP nhất quán · nén ảnh và rút gọn CSS</td><td>18/18 trang dịch vụ có contextual internal link đi ra · 18/18 có FAQPage schema hợp lệ · 18/18 có outgoing link dẫn nguồn y khoa · slow page còn tối đa 10</td></tr><tr><td><b>S4</b></td><td>KW-05 · KW-02 · AI-07 · AI-08 · AI-05 · AI-10 · KW-07 · KW-01 · KW-04 · KW-06</td><td>Viết lại title tag · dựng pillar page cho cụm bệnh lý · dựng trang thực thể · phân loại search intent · đo baseline hiện diện trên công cụ AI</td><td>Toàn bộ title tag ≤ 65 ký tự · mỗi content cluster có 1 pillar page · trang thực thể đã xuất bản · có baseline AI và 20 từ khoá cố định. Cần CD-07 và CD-08 được duyệt.</td></tr><tr><td><b>Đo lại</b></td><td>Nhóm chỉ số Kỳ vọng: average position · CTR · organic clicks vào trang dịch vụ · Core Web Vitals</td><td>Bản đo lần 1 của bảng KPI Tracking</td><td>Đủ 28 ngày dữ liệu sau sprint cuối mới đọc được. Đo trước là đọc ra số sai</td></tr></tbody></table></div>
+    <tbody><tr><td><b>S1</b><span class="sm">14/09/2026 – 16/09/2026</span></td>
+    <td>TR-14 · TR-01 · TR-04 · TR-08 · TR-02 · TR-15</td><td>83 broken URL đã cài 301 redirect · GA4 đếm được chuyển đổi · broken internal link đã dọn · XML sitemap sạch · đủ security header</td><td>Gọi lại 83 URL: 0 URL trả 404 · báo cáo chuyển đổi GA4 khác 0 · crawl lại: 0 broken internal link · sitemap_index còn 3 sitemap con · đủ 6/6 security header</td></tr><tr><td><b>S2</b><span class="sm">17/09/2026 – 30/09/2026</span></td>
+    <td>TR-10 · AI-02 · TR-16 · TR-12 · KW-09 · TR-11 · TR-05 · AI-04</td><td>898 ảnh có image alt attribute · mỗi trang đúng 1 H1 tag · XML sitemap khai thẻ ảnh · schema markup đúng loại cơ sở y tế · gỡ nofollow trên internal link</td><td>Tỷ lệ ảnh có image alt attribute 100% · 40/40 trang có đúng 1 H1 tag · Rich Results Test không báo lỗi · 0 internal link nofollow trừ link chức năng</td></tr><tr><td><b>S3</b><span class="sm">01/10/2026 – 14/10/2026</span></td>
+    <td>KW-03 · AI-03 · TR-03 · AI-09 · TR-17 · AI-06 · TR-13</td><td>18 trang dịch vụ liên kết ngang theo nhóm bệnh lý · có FAQPage schema · có outgoing link dẫn nguồn y khoa · NAP nhất quán · nén ảnh và rút gọn CSS</td><td>18/18 trang dịch vụ có contextual internal link đi ra · 18/18 có FAQPage schema hợp lệ · 18/18 có outgoing link dẫn nguồn y khoa · slow page còn tối đa 10</td></tr><tr><td><b>S4</b><span class="sm">15/10/2026 – 28/10/2026</span></td>
+    <td>KW-05 · KW-02 · AI-07 · AI-08 · AI-05 · AI-10 · KW-07 · KW-01 · KW-04 · KW-06</td><td>Viết lại title tag · dựng pillar page cho cụm bệnh lý · dựng trang thực thể · phân loại search intent · đo baseline hiện diện trên công cụ AI</td><td>Toàn bộ title tag ≤ 65 ký tự · mỗi content cluster có 1 pillar page · trang thực thể đã xuất bản · có baseline AI và 20 từ khoá cố định. Cần CD-07 và CD-08 được duyệt.</td></tr><tr><td><b>Đo lại</b><span class="sm">29/10/2026 – 25/11/2026</span></td>
+    <td>Nhóm chỉ số Kỳ vọng: average position · CTR · organic clicks vào trang dịch vụ · Core Web Vitals</td><td>Bản đo lần 1 của bảng KPI Tracking</td><td>Đủ 28 ngày dữ liệu sau sprint cuối mới đọc được. Đo trước là đọc ra số sai</td></tr></tbody></table></div>
   <div class="flag red"><h4>Điều kiện để giữ được lịch này</h4>
   <p>Sprint 1 chỉ chạy đủ nếu 83 đích redirect được duyệt trước 14/09. Sprint 2 cần trả lời trạng thái kinh doanh của 3 trang dịch vụ. Sprint 4 cần danh sách cụm từ pháp chế duyệt và tên bác sĩ chịu trách nhiệm chuyên môn, nếu không thì 42 giờ biên tập nội dung của Sprint 4 phải đẩy sang kỳ sau.</p></div>
 </section>
